@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExclelToSql", "ExclelToSql\ExclelToSql.csproj", "{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26A0E68F-1E44-437C-9A9C-4A10AD95DE0E}
+	EndGlobalSection
+EndGlobal
