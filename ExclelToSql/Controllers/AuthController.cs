@@ -19,7 +19,7 @@ namespace ExclelToSql.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            var user = await _context.Tests.FirstOrDefaultAsync(x =>
+            var user = await _context.Users.FirstOrDefaultAsync(x =>
                 x.UserName == request.Username &&
                 x.PassWord1 == request.Password);
 

@@ -60,6 +60,7 @@ namespace ExclelToSql.Controllers
                     c.TeacherId,
                     c.Section,
                     c.StudentsCount,
+                    c.SessionsCount,
 
 
                     Course = includeCourse && c.Course != null
@@ -204,128 +205,142 @@ namespace ExclelToSql.Controllers
         //==========================
         //PATCH CODES//
         //==========================
+        [HttpPatch("{Id}")]
+        public async Task<IActionResult> UpdateClass(
+        int Id,
+        ClassChangeRequest request)
+        {
+            await using var transaction =
+                await _context.Database.BeginTransactionAsync();
 
-//        [HttpPatch("{CourseId}")]
-//        public async Task<IActionResult> UpdateClass(
-//int CourseId,
-//ClassChangeRequest request)
-//        {
-//            await using var transaction =
-//                await _context.Database.BeginTransactionAsync();
+            try
+            {
+                // -------------------------------------------------
+                // 0. Get the logged-in user's username from Session
+                // -------------------------------------------------
 
-//            try
-//            {
-//                // Find the existing teacher
-//                var teacher = await _context.Classes
-//                    .FirstOrDefaultAsync(t => t.CourseId == CourseId);
+                //var editorId = HttpContext.Session.GetString("Username");
 
-//                if (teacher == null)
-//                {
-//                    return NotFound("Teacher not found.");
-//                }
+                //if (string.IsNullOrEmpty(editorId))
+                //{
+                //    return Unauthorized("You must be logged in to edit a teacher.");
+                //}
 
-//                // -------------------------------------------------
-//                // 1. Save the CURRENT version into TeachersHistory
-//                // -------------------------------------------------
+                // -------------------------------------------------
+                // Find the existing class
+                // -------------------------------------------------
 
-//                var historyRecords = await _context.ClassesHistories
-//                    .Where(h => h.CourseId == CourseId)
-//                    .OrderBy(h => h.UpdateFlag)
-//                    .ToListAsync();
+                var Class = await _context.Classes
+                    .FirstOrDefaultAsync(t => t.Id == Id);
 
-//                // If there are already 3 history records,
-//                // delete the oldest one and shift the others.
-//                if (historyRecords.Count >= 3)
-//                {
-//                    var oldestRecord = historyRecords.First();
+                if (Class == null)
+                {
+                    return NotFound("Class not found.");
+                }
 
-//                    _context.ClassesHistories.Remove(oldestRecord);
+                // -------------------------------------------------
+                // 1. Save the CURRENT version into ClassesHistory
+                // -------------------------------------------------
 
-//                    foreach (var record in historyRecords
-//                        .Where(h => h.HistoryId != oldestRecord.HistoryId)
-//                        .OrderBy(h => h.UpdateFlag))
-//                    {
-//                        record.UpdateFlag--;
-//                    }
-//                }
+                var historyRecords = await _context.ClassesHistories
+                    .Where(h => h.Id == Id)
+                    .OrderBy(h => h.UpdateFlag)
+                    .ToListAsync();
 
-//                // Determine the new history flag
-//                var remainingHistoryCount = historyRecords.Count >= 3
-//                    ? 2
-//                    : historyRecords.Count;
+                // If there are already 3 history records,
+                // delete the oldest one and shift the others.
+                if (historyRecords.Count >= 3)
+                {
+                    var oldestRecord = historyRecords.First();
 
-//                int newUpdateFlag = remainingHistoryCount + 1;
+                    _context.ClassesHistories.Remove(oldestRecord);
 
-//                // Create history from the CURRENT teacher
-//                var history = new ClassesHistory
-//                {
-//                    PersonalCode = teacher.PersonalCode,
+                    foreach (var record in historyRecords
+                        .Where(h => h.HistoryId != oldestRecord.HistoryId)
+                        .OrderBy(h => h.UpdateFlag))
+                    {
+                        record.UpdateFlag--;
+                    }
+                }
 
-//                    FirstName = teacher.FirstName,
-//                    LastName = teacher.LastName,
-//                    Ranking = teacher.Ranking,
-//                    Grade = teacher.Grade,
-//                    AccountNumber = teacher.AccountNumber,
-//                    InsuranceNumber = teacher.InsuranceNumber,
-//                    NationalCode = teacher.NationalCode,
+                // Determine the new history flag
+                var remainingHistoryCount = historyRecords.Count >= 3
+                    ? 2
+                    : historyRecords.Count;
 
-//                    UpdateFlag = newUpdateFlag,
-//                    CreationDate = DateOnly.FromDateTime(DateTime.Now)
-//                };
+                int newUpdateFlag = remainingHistoryCount + 1;
 
-//                _context.TeachersHistories.Add(history);
+                // -------------------------------------------------
+                // Create history from the CURRENT class
+                // -------------------------------------------------
 
-//                // -------------------------------------------------
-//                // 2. Modify ONLY the fields supplied by the client
-//                // -------------------------------------------------
+                var history = new ClassesHistory
+                {
+                    Id = Class.Id,
+                    CourseId = Class.CourseId,
+                    TeacherId = Class.TeacherId,
+                    Section = Class.Section,
+                    StudentsCount = Class.StudentsCount,
+                    SessionsCount = Class.SessionsCount,
+                    CreationDate = DateOnly.FromDateTime(DateTime.Now),
+                    UpdateFlag = newUpdateFlag
 
-//                if (request.FirstName != null)
-//                    teacher.FirstName = request.FirstName;
+                    // The logged-in user who made the change
+                    //EditorName = editorId
+                };
 
-//                if (request.LastName != null)
-//                    teacher.LastName = request.LastName;
+                _context.ClassesHistories.Add(history);
 
-//                if (request.Ranking.HasValue)
-//                    teacher.Ranking = request.Ranking;
+                // -------------------------------------------------
+                // 2. Modify ONLY the fields supplied by the client
+                // -------------------------------------------------
 
-//                if (request.Grade.HasValue)
-//                    teacher.Grade = request.Grade;
+                if (request.Section.HasValue)
+                    Class.Section = request.Section;
 
-//                if (request.AccountNumber != null)
-//                    teacher.AccountNumber = request.AccountNumber;
+                if (request.StudentsCount.HasValue)
+                    Class.StudentsCount = request.StudentsCount;
 
-//                if (request.InsuranceNumber != null)
-//                    teacher.InsuranceNumber = request.InsuranceNumber;
+                if (request.SessionsCount.HasValue)
+                    Class.SessionsCount = request.SessionsCount;
 
-//                if (request.NationalCode != null)
-//                    teacher.NationalCode = request.NationalCode;
 
-//                // PersonalCode is NEVER modified.
-//                // Id is NEVER modified.
+                // PersonalCode is NEVER modified.
+                // Id is NEVER modified.
 
-//                // Save history + teacher update
-//                await _context.SaveChangesAsync();
+                // -------------------------------------------------
+                // 3. Save history + teacher update
+                // -------------------------------------------------
 
-//                // Commit transaction
-//                await transaction.CommitAsync();
+                await _context.SaveChangesAsync();
 
-//                return Ok(new
-//                {
-//                    message = "Teacher updated successfully.",
-//                    personalCode = teacher.PersonalCode,
-//                    historyUpdateFlag = history.UpdateFlag
-//                });
-//            }
-//            catch (Exception ex)
-//            {
-//                await transaction.RollbackAsync();
+                // -------------------------------------------------
+                // 4. Commit transaction
+                // -------------------------------------------------
 
-//                return StatusCode(500, new
-//                {
-//                    message = "An error occurred while updating the teacher.",
-//                    error = ex.Message
-//                });
-//            }
-//        }
+                await transaction.CommitAsync();
+
+                return Ok(new
+                {
+                    message = "Class updated successfully.",
+                    Id = Class.Id,
+                    historyUpdateFlag = history.UpdateFlag,
+                    editorId = history.EditorName
+                });
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+
+                return StatusCode(500, new
+                {
+                    exception = ex.GetType().FullName,
+                    message = ex.Message,
+                    innerException = ex.InnerException?.GetType().FullName,
+                    innerMessage = ex.InnerException?.Message,
+                    fullException = ex.ToString()
+                });
+            }
+        }
     }
 }

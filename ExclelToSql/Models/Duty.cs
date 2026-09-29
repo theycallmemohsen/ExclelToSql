@@ -12,15 +12,17 @@ public partial class Duty
     [Key]
     public int Id { get; set; }
 
-    public string? Ranking { get; set; }
+    [Column("DutyGroupID")]
+    public int? DutyGroupId { get; set; }
 
-    public int? FullTimeFacultyDuty { get; set; }
+    [StringLength(50)]
+    public string? Title { get; set; }
 
-    public int? DeanDeputyDirectorGeneral { get; set; }
+    public int? Value { get; set; }
 
-    public int? DepartmentManager { get; set; }
-
-    public int? DeputyandUnitHead { get; set; }
+    [ForeignKey("DutyGroupId")]
+    [InverseProperty("Duties")]
+    public virtual Ranking? DutyGroup { get; set; }
 
     [InverseProperty("DutyNavigation")]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();

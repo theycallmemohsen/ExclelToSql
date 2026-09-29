@@ -20,9 +20,13 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<Class> Classes { get; set; }
 
+    public virtual DbSet<ClassesHistory> ClassesHistories { get; set; }
+
     public virtual DbSet<Column> Columns { get; set; }
 
     public virtual DbSet<Course> Courses { get; set; }
+
+    public virtual DbSet<CoursesHistory> CoursesHistories { get; set; }
 
     public virtual DbSet<Duty> Duties { get; set; }
 
@@ -42,11 +46,9 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<TeachersHistory> TeachersHistories { get; set; }
 
-    public virtual DbSet<Test> Tests { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserLevel> UserLevels { get; set; }
-    public virtual DbSet<ClassesHistory> ClassesHistories { get; set; }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -79,6 +81,8 @@ public partial class ExclelToSqlContext : DbContext
         modelBuilder.Entity<Duty>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.DutyGroup).WithMany(p => p.Duties).HasConstraintName("FK_Duty_Rankings");
         });
 
         modelBuilder.Entity<Fee>(entity =>
@@ -114,11 +118,11 @@ public partial class ExclelToSqlContext : DbContext
             entity.HasOne(d => d.RankingNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Rankings");
         });
 
-        modelBuilder.Entity<Test>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Test__3214EC0737AF26B9");
 
-            entity.HasOne(d => d.AuthNavigation).WithMany(p => p.Tests)
+            entity.HasOne(d => d.AuthNavigation).WithMany(p => p.Users)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserLevel_Test");
         });

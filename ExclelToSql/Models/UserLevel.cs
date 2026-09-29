@@ -16,5 +16,5 @@ public partial class UserLevel
     public string Role1 { get; set; } = null!;
 
     [InverseProperty("AuthNavigation")]
-    public virtual ICollection<Test> Tests { get; set; } = new List<Test>();
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

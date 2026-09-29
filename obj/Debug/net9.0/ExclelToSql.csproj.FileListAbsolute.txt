@@ -1,0 +1,10 @@
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.csproj.AssemblyReference.cache
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.AssemblyInfoInputs.cache
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.AssemblyInfo.cs
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.csproj.CoreCompileInputs.cache
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.RazorAssemblyInfo.cache
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.RazorAssemblyInfo.cs
+C:\Users\Mohsen\Desktop\.Net\ExclelToSql\obj\Debug\net9.0\ExclelToSql.sourcelink.json

@@ -63,6 +63,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ExclelToSql.Controllers.ClassesApiController",
+    "Method": "UpdateClass",
+    "RelativePath": "api/ClassesApi/{Id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ExclelToSql.Models.DTO.ClassChangeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ExclelToSql.Controllers.CoursesApiController",
     "Method": "GetAll",
     "RelativePath": "api/CoursesApi",
@@ -70,6 +91,43 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExclelToSql.Controllers.CoursesApiController",
+    "Method": "GetById",
+    "RelativePath": "api/CoursesApi/{CourseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExclelToSql.Controllers.CoursesApiController",
+    "Method": "UpdateTeacher",
+    "RelativePath": "api/CoursesApi/{CourseId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ExclelToSql.Models.DTO.CourseChangeRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

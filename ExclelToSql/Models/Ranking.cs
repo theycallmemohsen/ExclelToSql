@@ -14,6 +14,9 @@ public partial class Ranking
     [Column("Ranking")]
     public string Ranking1 { get; set; } = null!;
 
+    [InverseProperty("DutyGroup")]
+    public virtual ICollection<Duty> Duties { get; set; } = new List<Duty>();
+
     [InverseProperty("RankingNavigation")]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

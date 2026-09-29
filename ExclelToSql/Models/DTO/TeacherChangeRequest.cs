@@ -15,5 +15,7 @@
         public string? InsuranceNumber { get; set; }
 
         public string? NationalCode { get; set; }
+        public int? Duty { get; set; }
+
     }
 }

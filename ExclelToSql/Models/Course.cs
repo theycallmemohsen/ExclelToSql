@@ -26,8 +26,6 @@ public partial class Course
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? CreditsCoefficients { get; set; }
 
-    public int? SessionsNumber { get; set; }
-
     public DateOnly? CreationDate { get; set; }
 
     [InverseProperty("Course")]

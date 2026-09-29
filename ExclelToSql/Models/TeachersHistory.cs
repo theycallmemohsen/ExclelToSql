@@ -40,4 +40,6 @@ public partial class TeachersHistory
 
     [StringLength(50)]
     public string? EditorName { get; set; }
+
+    public int? Duty { get; set; }
 }

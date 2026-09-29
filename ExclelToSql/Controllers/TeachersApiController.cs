@@ -30,6 +30,7 @@ namespace ExclelToSql.Controllers
 
             bool includeFee = false;
             bool includeRanking = false;
+            bool includeDuty = false;
 
             if (!string.IsNullOrWhiteSpace(expand))
             {
@@ -39,6 +40,8 @@ namespace ExclelToSql.Controllers
 
                 includeFee = expands.Contains("fee") || expands.Contains("all");
                 includeRanking = expands.Contains("ranking") || expands.Contains("all");
+                includeDuty = expands.Contains("duty") || expands.Contains("all");
+
             }
 
             if (includeFee)
@@ -46,6 +49,9 @@ namespace ExclelToSql.Controllers
 
             if (includeRanking)
                 query = query.Include(t => t.RankingNavigation);
+
+            if (includeDuty)
+                query = query.Include(t => t.DutyNavigation);
 
             var result = await query
                 .Select(t => new
@@ -59,6 +65,7 @@ namespace ExclelToSql.Controllers
                     t.NationalCode,
                     t.Grade,
                     t.Ranking,
+                    t.Duty,
 
                     Fee = includeFee && t.GradeNavigation != null
                         ? new
@@ -80,7 +87,16 @@ namespace ExclelToSql.Controllers
                             t.RankingNavigation.Id,
                             t.RankingNavigation.Ranking1
                         }
-                        : null
+                        : null,
+                        DutyInfo = includeDuty && t.DutyNavigation != null
+                         ? new
+                         {
+                             t.DutyNavigation.Id,
+                             t.DutyNavigation.DutyGroupId,
+                             t.DutyNavigation.Title,
+                             t.DutyNavigation.Value
+                         }
+                        : null,
                 })
                 .ToListAsync();
 
@@ -95,6 +111,8 @@ namespace ExclelToSql.Controllers
 
             bool includeFee = false;
             bool includeRanking = false;
+            bool includeDuty = false;
+
 
             if (!string.IsNullOrWhiteSpace(expand))
             {
@@ -104,6 +122,8 @@ namespace ExclelToSql.Controllers
 
                 includeFee = expands.Contains("fee") || expands.Contains("all");
                 includeRanking = expands.Contains("ranking") || expands.Contains("all");
+                includeDuty = expands.Contains("duty") || expands.Contains("all");
+
             }
 
             if (includeFee)
@@ -111,6 +131,9 @@ namespace ExclelToSql.Controllers
 
             if (includeRanking)
                 query = query.Include(t => t.RankingNavigation);
+
+            if (includeDuty)
+                query = query.Include(t => t.DutyNavigation);
 
             var teacher = await query
                 .Where(t => t.Id == id)
@@ -125,6 +148,7 @@ namespace ExclelToSql.Controllers
                     t.NationalCode,
                     t.Grade,
                     t.Ranking,
+                    t.Duty,
 
                     Fee = includeFee && t.GradeNavigation != null
                         ? new
@@ -146,7 +170,17 @@ namespace ExclelToSql.Controllers
                             t.RankingNavigation.Id,
                             t.RankingNavigation.Ranking1
                         }
-                        : null
+                        : null,
+                    DutyInfo = includeDuty && t.DutyNavigation != null
+                         ? new
+                         {
+                             t.DutyNavigation.Id,
+                             t.DutyNavigation.DutyGroupId,
+                             t.DutyNavigation.Title,
+                             t.DutyNavigation.Value
+
+                         }
+                        : null,
                 })
                 .FirstOrDefaultAsync();
 
@@ -341,9 +375,9 @@ namespace ExclelToSql.Controllers
                     AccountNumber = teacher.AccountNumber,
                     InsuranceNumber = teacher.InsuranceNumber,
                     NationalCode = teacher.NationalCode,
-
                     UpdateFlag = newUpdateFlag,
-                    CreationDate = DateOnly.FromDateTime(DateTime.Now)
+                    CreationDate = DateOnly.FromDateTime(DateTime.Now),
+                    Duty = teacher.Duty
                 };
 
                 _context.TeachersHistories.Add(history);
@@ -372,6 +406,10 @@ namespace ExclelToSql.Controllers
 
                 if (request.NationalCode != null)
                     teacher.NationalCode = request.NationalCode;
+
+                if (request.Duty.HasValue)
+                    teacher.Duty = request.Duty;
+
 
                 // PersonalCode is NEVER modified.
                 // Id is NEVER modified.
