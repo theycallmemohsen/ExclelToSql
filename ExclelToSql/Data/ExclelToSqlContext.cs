@@ -24,11 +24,15 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<Column> Columns { get; set; }
 
+    public virtual DbSet<Cooperation> Cooperations { get; set; }
+
     public virtual DbSet<Course> Courses { get; set; }
 
     public virtual DbSet<CoursesHistory> CoursesHistories { get; set; }
 
     public virtual DbSet<Duty> Duties { get; set; }
+
+    public virtual DbSet<EducationalGroup> EducationalGroups { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
 
@@ -38,9 +42,15 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<Information> Information { get; set; }
 
+    public virtual DbSet<Nullteacher> Nullteachers { get; set; }
+
+    public virtual DbSet<OtherTeacher> OtherTeachers { get; set; }
+
     public virtual DbSet<Ranking> Rankings { get; set; }
 
     public virtual DbSet<Section> Sections { get; set; }
+
+    public virtual DbSet<Semester> Semesters { get; set; }
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
@@ -49,6 +59,7 @@ public partial class ExclelToSqlContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserLevel> UserLevels { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -63,19 +74,18 @@ public partial class ExclelToSqlContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Classes__3214EC070F7A4B2E");
 
-            entity.HasOne(d => d.Course).WithMany(p => p.Classes).HasConstraintName("FK_Classes_CourseID");
+            entity.HasOne(d => d.Course).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Courses");
+
+            entity.HasOne(d => d.NationalCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Teachers");
 
             entity.HasOne(d => d.SectionNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Section");
 
-            entity.HasOne(d => d.Teacher).WithMany(p => p.Classes).HasConstraintName("FK_Classes_TeacherId");
+            entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Semester");
         });
 
-        modelBuilder.Entity<Course>(entity =>
+        modelBuilder.Entity<Cooperation>(entity =>
         {
-            entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D71A7C32EAF2D");
-
-            entity.Property(e => e.CourseId).ValueGeneratedNever();
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.HasKey(e => e.Id).HasName("PK__Cooperat__3214EC07A21A49B6");
         });
 
         modelBuilder.Entity<Duty>(entity =>
@@ -95,6 +105,13 @@ public partial class ExclelToSqlContext : DbContext
             entity.Property(e => e.Id).ValueGeneratedNever();
         });
 
+        modelBuilder.Entity<Nullteacher>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_NullTeachers");
+
+            entity.ToTable("NULLTeachers", tb => tb.HasTrigger("TR_NullTeachers_UpdateTeachers"));
+        });
+
         modelBuilder.Entity<Ranking>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Rankings__3214EC07E144EAB7");
@@ -105,23 +122,30 @@ public partial class ExclelToSqlContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Sections__3214EC07C494E503");
         });
 
+        modelBuilder.Entity<Semester>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Semester__3214EC0728B0C663");
+        });
+
         modelBuilder.Entity<Teacher>(entity =>
         {
-            entity.HasKey(e => e.PersonalCode).HasName("PK__Teachers__63E2562B4A68B111");
+            entity.HasKey(e => e.NationalCode).HasName("PK__Teachers__63E2562B4A68B111");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
+            entity.HasOne(d => d.CooperationTypeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Cooperation");
+
             entity.HasOne(d => d.DutyNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Duty");
 
-            entity.HasOne(d => d.GradeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Grades");
+            entity.HasOne(d => d.GradeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Fee");
+
+            entity.HasOne(d => d.GroupCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_EducationalGroup");
 
             entity.HasOne(d => d.RankingNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Rankings");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Test__3214EC0737AF26B9");
-
             entity.HasOne(d => d.AuthNavigation).WithMany(p => p.Users)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserLevel_Test");

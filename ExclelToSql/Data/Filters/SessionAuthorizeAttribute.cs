@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ExclelToSql.Filters
+namespace ExclelToSql.Data.Filters
 {
     public class SessionAuthorizeAttribute : Attribute, IAuthorizationFilter
     {

@@ -8,20 +8,15 @@ namespace ExclelToSql.Models;
 
 public partial class Course
 {
-    [Column("ID")]
-    public int Id { get; set; }
-
     [Key]
     public int CourseId { get; set; }
 
-    [StringLength(100)]
+    [StringLength(200)]
     public string? CourseName { get; set; }
 
-    [Column(TypeName = "decimal(18, 2)")]
-    public decimal? Theoretical { get; set; }
+    public double? Theoretical { get; set; }
 
-    [Column(TypeName = "decimal(18, 2)")]
-    public decimal? Practical { get; set; }
+    public double? Practical { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? CreditsCoefficients { get; set; }

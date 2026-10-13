@@ -1,7 +1,126 @@
+﻿//using ExcelDataReader;
+//using ExclelToSql.Data;
+//using ExclelToSql.Models;
+//using Microsoft.AspNetCore.Mvc;
+//using System.Diagnostics;
+//using System.Text;
+
+//namespace ExclelToSql.Controllers
+//{
+//    public class HomeController : Controller
+//    {
+//        private readonly ILogger<HomeController> _logger;
+//        private readonly ExclelToSqlContext _context;
+
+//        public HomeController(ILogger<HomeController> logger, ExclelToSqlContext context)
+//        {
+//            _logger = logger;
+//            _context = context;
+//        }
+
+//        public IActionResult Index()
+//        {
+//            return View();
+//        }
+
+//        public IActionResult Privacy()
+//        {
+//            return View();
+//        }
+
+//        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+//        public IActionResult Error()
+//        {
+//            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+//        }
+//        public IActionResult UploadExcel()
+//        {
+//            return View();
+//        }
+//        [HttpPost]
+//        public async Task<IActionResult> UploadExcel(IFormFile file)
+//        {
+
+//            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+//            if (file != null && file.Length > 0)
+//            {
+//                var UploadFolder = $"{Directory.GetCurrentDirectory()}\\wwwroot\\Uploads\\";
+//                if (!Directory.Exists(UploadFolder))
+//                {
+//                    Directory.CreateDirectory(UploadFolder);
+//                }
+//                var filePath = Path.Combine(UploadFolder, file.FileName);
+//                using (var Stream = new FileStream(filePath, FileMode.Create))
+//                {
+//                    await file.CopyToAsync(Stream);
+//                }
+//                using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
+//                {
+//                    // Auto-detect format, supports:
+//                    //  - Binary Excel files (2.0-2003 format; *.xls)
+//                    //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
+//                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+//                    {
+//                        // Choose one of either 1 or 2:
+
+//                        // 1. Use the reader methods
+//                        //bool IsHeaderSkipped = false;
+//                        reader.Read(); // Skip row 1
+//                        //reader.Read(); // Skip row 2
+
+//                        do
+//                        {
+//                            //bool isHeaderRow = true;
+//                            while (reader.Read())
+//                            {
+//                                //if (!IsHeaderSkipped)
+//                                //{
+//                                //    IsHeaderSkipped = true;
+//                                //    continue;
+//                                //}
+//                                //if (isHeaderRow)
+//                                //{
+//                                //    isHeaderRow = false;
+//                                //    continue;
+//                                //}
+//                                EducationalGroup C = new EducationalGroup();
+
+//                                C.GroupName = reader.GetValue(1)?.ToString()?.Trim() ?? "";
+
+
+
+
+
+
+//                                _context.Add(C);
+
+
+//                                // reader.GetDouble(0);
+//                            }
+//                            await _context.SaveChangesAsync();
+//                        } while (reader.NextResult());
+//                        ViewBag.Message = "Success";
+
+
+//                    }
+//                }
+//            }
+//            else
+//                ViewBag.Message = "Empty";
+//            return View();
+//        }
+
+//    }
+//}
+
+
+
+
 using ExcelDataReader;
 using ExclelToSql.Data;
 using ExclelToSql.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Text;
 
@@ -12,7 +131,7 @@ namespace ExclelToSql.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ExclelToSqlContext _context;
 
-        public HomeController(ILogger<HomeController> logger , ExclelToSqlContext context)
+        public HomeController(ILogger<HomeController> logger, ExclelToSqlContext context)
         {
             _logger = logger;
             _context = context;
@@ -31,98 +150,189 @@ namespace ExclelToSql.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
+
         public IActionResult UploadExcel()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult>UploadExcel(IFormFile file)
-        {
-            
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                if (file != null && file.Length > 0)
-                {
-                    var UploadFolder = $"{Directory.GetCurrentDirectory()}\\wwwroot\\Uploads\\";
-                    if (!Directory.Exists(UploadFolder))
-                    {
-                        Directory.CreateDirectory(UploadFolder);
-                    }
-                    var filePath = Path.Combine(UploadFolder, file.FileName);
-                    using (var Stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(Stream);
-                    }
-                    using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
-                    {
-                        // Auto-detect format, supports:
-                        //  - Binary Excel files (2.0-2003 format; *.xls)
-                        //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
-                        using (var reader = ExcelReaderFactory.CreateReader(stream))
-                        {
-                        // Choose one of either 1 or 2:
 
-                        // 1. Use the reader methods
-                        //bool IsHeaderSkipped = false;
-                        reader.Read(); // Skip row 1
-                        reader.Read(); // Skip row 2
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadExcel(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                ViewBag.Message = "No file was received. Please select an Excel file.";
+                return View();
+            }
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            if (file != null && file.Length > 0)
+            {
+                try
+                {
+                    var uploadFolder = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "Uploads");
+
+                    Directory.CreateDirectory(uploadFolder);
+
+                    var fileName = Path.GetFileName(file.FileName);
+                    var filePath = Path.Combine(uploadFolder, fileName);
+
+                    await using (var outputStream = new FileStream(
+                        filePath, FileMode.Create, FileAccess.Write))
+                    {
+                        await file.CopyToAsync(outputStream);
+                    }
+
+                    int inserted = 0;
+                    int skipped = 0;
+
+                    // Prevent duplicate PersonalCode values within this upload.
+                    var importedCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                    await using (var stream = new FileStream(
+                        filePath, FileMode.Open, FileAccess.Read))
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        bool skipFirstRow = true;
 
                         do
                         {
-                            //bool isHeaderRow = true;
                             while (reader.Read())
+                            {
+                                if (skipFirstRow)
                                 {
-                                //if (!IsHeaderSkipped)
-                                //{
-                                //    IsHeaderSkipped = true;
-                                //    continue;
-                                //}
-                                //if (isHeaderRow)
-                                //{
-                                //    isHeaderRow = false;
-                                //    continue;
-                                //}
-                                Excel C = new Excel();
-
-                                C.RowNumber = int.TryParse(reader.GetValue(0)?.ToString(), out int rowNumber) ? rowNumber : null;
-                                C.NationalNumber = reader.GetValue(1)?.ToString();
-                                C.PersonalCode = reader.GetValue(2)?.ToString();
-                                C.FirstName = reader.GetValue(3)?.ToString();
-                                C.LastName = reader.GetValue(4)?.ToString();
-                                C.Ranking = reader.GetValue(5)?.ToString();
-                                C.Grade = int.TryParse(reader.GetValue(6)?.ToString(), out int grade) ? grade : null;
-                                C.CourseName = reader.GetValue(7)?.ToString();
-                                C.Theoretical = decimal.TryParse(reader.GetValue(8)?.ToString(), out decimal theoretical) ? theoretical : null;
-                                C.Practical = decimal.TryParse(reader.GetValue(9)?.ToString(), out decimal practical) ? practical : null;
-                                C.Section = reader.GetValue(10)?.ToString();
-                                C.StudentNumber = int.TryParse(reader.GetValue(11)?.ToString(), out int studentNumber) ? studentNumber : null;
-                                C.CreditsCoefficients = decimal.TryParse(reader.GetValue(12)?.ToString(), out decimal creditsCoefficients) ? creditsCoefficients : null;
-                                C.CreditsCoefficientsSum = double.TryParse(reader.GetValue(13)?.ToString(), out double creditsCoefficientsSum) ? creditsCoefficientsSum : null;
-                                C.Duty = int.TryParse(reader.GetValue(14)?.ToString(), out int duty) ? duty : null;
-                                C.TeachingExtra = double.TryParse(reader.GetValue(15)?.ToString(), out double teachingExtra) ? teachingExtra : null;
-                                C.TheoreticalAmount =decimal.TryParse(reader.GetValue(16)?.ToString(), out decimal TheoreticalAmount)? TheoreticalAmount: null; 
-                                C.GrossAmount =decimal.TryParse(reader.GetValue(17)?.ToString(), out decimal GrossAmount)? GrossAmount: null;
-                                C.AccountNumber = reader.GetValue(18)?.ToString();
-                                C.InsuranceNumber = reader.GetValue(19)?.ToString();
-
-                                _context.Add(C);
-
-
-                                    // reader.GetDouble(0);
+                                    skipFirstRow = false;
+                                    continue;
                                 }
-                                await _context.SaveChangesAsync();
-                            } while (reader.NextResult());
-                        ViewBag.Message = "Success";
+
+                                //string coursename =
+                                //    reader.GetValue(1)?.ToString()?.Trim() ?? "";
+
+                                //if (string.IsNullOrWhiteSpace(coursename))
+                                //{
+                                //    skipped++;
+                                //    continue;
+                                //}
+
+                                //if (!importedCodes.Add(coursename))
+                                //{
+                                //    skipped++;
+                                //    continue;
+                                //}
+
+                                //bool alreadyExists = await _context.Courses
+                                //    .AnyAsync(t => t.CourseName == coursename);
+
+                                //if (alreadyExists)
+                                //{
+                                //    skipped++;
+                                //    continue;
+                                //}
 
 
+                                OtherTeacher C = new OtherTeacher();
+                                //===============================================================================
+                                string value = reader.GetValue(0)?.ToString()?.Trim() ?? "";
+
+                                value = value
+                                    .Replace('۰', '0').Replace('۱', '1')
+                                    .Replace('۲', '2').Replace('۳', '3')
+                                    .Replace('۴', '4').Replace('۵', '5')
+                                    .Replace('۶', '6').Replace('۷', '7')
+                                    .Replace('۸', '8').Replace('۹', '9')
+                                    .Replace('٠', '0').Replace('١', '1')
+                                    .Replace('٢', '2').Replace('٣', '3')
+                                    .Replace('٤', '4').Replace('٥', '5')
+                                    .Replace('٦', '6').Replace('٧', '7')
+                                    .Replace('٨', '8').Replace('٩', '9');
+
+                                C.PresentationCode = string.IsNullOrWhiteSpace(value) ? null : value;
+
+                                string value2 = reader.GetValue(1)?.ToString()?.Trim() ?? "";
+
+                                value2 = value2
+                                    .Replace('۰', '0').Replace('۱', '1')
+                                    .Replace('۲', '2').Replace('۳', '3')
+                                    .Replace('۴', '4').Replace('۵', '5')
+                                    .Replace('۶', '6').Replace('۷', '7')
+                                    .Replace('۸', '8').Replace('۹', '9')
+                                    .Replace('٠', '0').Replace('١', '1')
+                                    .Replace('٢', '2').Replace('٣', '3')
+                                    .Replace('٤', '4').Replace('٥', '5')
+                                    .Replace('٦', '6').Replace('٧', '7')
+                                    .Replace('٨', '8').Replace('٩', '9');
+
+                                C.TeacherId = string.IsNullOrWhiteSpace(value2) ? null : value2;
+
+                                string value3 = reader.GetValue(2)?.ToString()?.Trim() ?? "";
+
+                                C.TeacherFullName = string.IsNullOrWhiteSpace(value3) ? null : value3;
+
+                                string value4 = reader.GetValue(3)?.ToString()?.Trim() ?? "";
+
+                                C.Role = string.IsNullOrWhiteSpace(value4) ? null : value4;
+
+                                _context.OtherTeachers.Add(C);
+                                inserted++;
+                                //================================================================
+                            }
                         }
-                    }
-                }
-            else
-                ViewBag.Message = "Empty";
-            return View();  
-        }
+                        while (reader.NextResult());
 
+                        await _context.SaveChangesAsync();
+                    }
+
+                    ViewBag.Message =
+                        $"Import completed. Appended: {inserted}; skipped: {skipped}.";
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error importing the Excel file.");
+
+                    var details = new StringBuilder();
+                    details.AppendLine(ex.Message);
+
+                    var inner = ex.InnerException;
+                    while (inner != null)
+                    {
+                        details.AppendLine(inner.Message);
+                        inner = inner.InnerException;
+                    }
+
+                    ViewBag.Message = $"Import failed: {details}";
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Empty";
+            }
+
+            return View();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

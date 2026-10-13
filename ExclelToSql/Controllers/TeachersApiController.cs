@@ -1,6 +1,6 @@
 ﻿
 using ExclelToSql.Data;
-using ExclelToSql.Filters;
+//using ExclelToSql.Filters;
 using ExclelToSql.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +66,8 @@ namespace ExclelToSql.Controllers
                     t.Grade,
                     t.Ranking,
                     t.Duty,
+                    t.TempCooperationType,
+                    t.TempGroupCode,
 
                     Fee = includeFee && t.GradeNavigation != null
                         ? new
@@ -149,6 +151,9 @@ namespace ExclelToSql.Controllers
                     t.Grade,
                     t.Ranking,
                     t.Duty,
+                    t.TempCooperationType,
+                    t.TempGroupCode,
+
 
                     Fee = includeFee && t.GradeNavigation != null
                         ? new
@@ -189,131 +194,8 @@ namespace ExclelToSql.Controllers
 
             return Ok(teacher);
         }
-        //=========================================
-        //PUT CODES
-        //=========================================
 
-
-        //[HttpPut("{personalCode}")]
-        //public async Task<IActionResult> UpdateTeacher(string personalCode,TeacherChangeRequest request)
-        //{
-        //    await using var transaction =
-        //        await _context.Database.BeginTransactionAsync();
-
-        //    try
-        //    {
-        //        // 1. Find the existing teacher
-        //        var teacher = await _context.Teachers
-        //            .FirstOrDefaultAsync(t => t.PersonalCode == personalCode);
-
-        //        if (teacher == null)
-        //        {
-        //            return NotFound("Teacher not found.");
-        //        }
-
-        //        // 2. Get existing history records for this teacher
-        //        var historyRecords = await _context.TeachersHistory
-        //            .Where(h => h.PersonalCode == personalCode)
-        //            .OrderBy(h => h.UpdateFlag)
-        //            .ToListAsync();
-
-        //        // 3. If already 3 history records exist,
-        //        // remove the oldest and shift the remaining flags.
-        //        if (historyRecords.Count >= 3)
-        //        {
-        //            var oldestRecord = historyRecords.First();
-
-        //            _context.TeachersHistory.Remove(oldestRecord);
-
-        //            // Shift 2 -> 1 and 3 -> 2
-        //            foreach (var record in historyRecords
-        //                .Where(h => h.HistoryId != oldestRecord.HistoryId))
-        //            {
-        //                record.UpdateFlag--;
-        //            }
-
-        //            await _context.SaveChangesAsync();
-        //        }
-
-        //        // 4. Determine the UpdateFlag for the new history record
-        //        var remainingCount = await _context.TeachersHistory
-        //            .CountAsync(h => h.PersonalCode == personalCode);
-
-        //        int newUpdateFlag = remainingCount + 1;
-
-        //        // 5. Create a history record containing the OLD data
-        //        var history = new TeacherHistory
-        //        {
-        //            PersonalCode = teacher.PersonalCode,
-        //            FirstName = teacher.FirstName,
-        //            LastName = teacher.LastName,
-        //            Ranking = teacher.Ranking,
-        //            Grade = teacher.Grade,
-        //            AccountNumber = teacher.AccountNumber,
-        //            InsuranceNumber = teacher.InsuranceNumber,
-        //            NationalCode = teacher.NationalCode,
-
-        //            UpdateFlag = newUpdateFlag,
-        //            CreationDate = DateOnly.FromDateTime(DateTime.Now)
-        //        };
-
-        //        // Add old version to TeachersHistory
-        //        _context.TeachersHistory.Add(history);
-
-        //        // 6. Update ONLY the allowed columns in Teachers
-        //        teacher.FirstName = request.FirstName;
-        //        teacher.LastName = request.LastName;
-        //        teacher.Ranking = request.Ranking;
-        //        teacher.Grade = request.Grade;
-        //        teacher.AccountNumber = request.AccountNumber;
-        //        teacher.InsuranceNumber = request.InsuranceNumber;
-        //        teacher.NationalCode = request.NationalCode;
-
-        //        // PersonalCode is NEVER changed
-        //        // teacher.PersonalCode = ...;  <-- Never do this
-
-        //        // 7. Save both the history and the updated teacher
-        //        await _context.SaveChangesAsync();
-
-        //        // 8. Make all changes permanent
-        //        await transaction.CommitAsync();
-
-        //        return Ok(new
-        //        {
-        //            message = "Teacher updated and previous version archived successfully.",
-
-        //            personalCode = teacher.PersonalCode,
-
-        //            historyUpdateFlag = history.UpdateFlag,
-
-        //            teacher = new
-        //            {
-        //                teacher.Id,
-        //                teacher.PersonalCode,
-        //                teacher.FirstName,
-        //                teacher.LastName,
-        //                teacher.Ranking,
-        //                teacher.Grade,
-        //                teacher.AccountNumber,
-        //                teacher.InsuranceNumber,
-        //                teacher.NationalCode
-        //            }
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await transaction.RollbackAsync();
-
-        //        return StatusCode(500, new
-        //        {
-        //            message = "An error occurred while updating the teacher.",
-        //            error = ex.Message
-        //        });
-        //    }
-        //}
-        //=====================================
-        //PATCH CODES
-        //=====================================
+    
         [HttpPatch("{personalCode}")]
         public async Task<IActionResult> UpdateTeacher(string personalCode, TeacherChangeRequest request)
         {

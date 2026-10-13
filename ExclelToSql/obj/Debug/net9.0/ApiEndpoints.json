@@ -26,6 +26,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ExclelToSql.Controllers.ClassApi",
+    "Method": "GetAll",
+    "RelativePath": "api/ClassApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ExclelToSql.Controllers.ClassesApiController",
     "Method": "GetAll",
     "RelativePath": "api/ClassesApi",
@@ -81,6 +91,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExclelToSql.Controllers.CourseApi",
+    "Method": "GetAll",
+    "RelativePath": "api/CourseApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -161,6 +181,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ExclelToSql.Controllers.NullTeachersApi",
+    "Method": "GetAll",
+    "RelativePath": "api/NullTeachersApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExclelToSql.Controllers.NullTeachersApi",
+    "Method": "Patch",
+    "RelativePath": "api/NullTeachersApi/{nationalCode}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nationalCode",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ExclelToSql.DTOs.UpdateNullTeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ExclelToSql.Controllers.RankingApiController",
     "Method": "GetAll",
     "RelativePath": "api/RankingApi",
@@ -174,6 +225,16 @@
     "ContainingType": "ExclelToSql.Controllers.SectionApiController",
     "Method": "GetAll",
     "RelativePath": "api/SectionApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExclelToSql.Controllers.Teacherapi",
+    "Method": "GetAll",
+    "RelativePath": "api/Teacherapi",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

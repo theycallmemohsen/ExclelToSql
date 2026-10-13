@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExclelToSql.Models;
 
-[Table("User")]
 public partial class User
 {
     [Key]
@@ -20,6 +19,12 @@ public partial class User
 
     [StringLength(10)]
     public string Auth { get; set; } = null!;
+
+    [StringLength(50)]
+    public string? SurName { get; set; }
+
+    [StringLength(50)]
+    public string? LastName { get; set; }
 
     [ForeignKey("Auth")]
     [InverseProperty("Users")]

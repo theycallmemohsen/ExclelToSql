@@ -17,11 +17,9 @@ public partial class CoursesHistory
     [StringLength(100)]
     public string? CourseName { get; set; }
 
-    [Column(TypeName = "decimal(18, 2)")]
-    public decimal? Theoretical { get; set; }
+    public double? Theoretical { get; set; }
 
-    [Column(TypeName = "decimal(18, 2)")]
-    public decimal? Practical { get; set; }
+    public double? Practical { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? CreditsCoefficients { get; set; }

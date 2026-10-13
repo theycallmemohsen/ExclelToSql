@@ -36,7 +36,7 @@ namespace ExclelToSql.Controllers
             return Ok(course);
         }
         [HttpPatch("{CourseId}")]
-        public async Task<IActionResult> UpdateTeacher(int CourseId,CourseChangeRequest request)
+        public async Task<IActionResult> UpdateTeacher(int CourseId, CourseChangeRequest request)
         {
             await using var transaction =
                 await _context.Database.BeginTransactionAsync();

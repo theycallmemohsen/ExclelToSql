@@ -45,7 +45,7 @@ namespace ExclelToSql.Controllers
                 query = query.Include(c => c.Course);
 
             if (includeTeacher)
-                query = query.Include(c => c.Teacher);
+                query = query.Include(c => c.NationalCodeNavigation);
 
             if (includeSection)
                 query = query.Include(c => c.SectionNavigation);
@@ -66,7 +66,7 @@ namespace ExclelToSql.Controllers
                     Course = includeCourse && c.Course != null
                         ? new
                         {
-                            c.Course.Id,
+                            
                             c.Course.CourseId,
                             c.Course.CourseName,
                             c.Course.Theoretical,
@@ -76,18 +76,18 @@ namespace ExclelToSql.Controllers
                         : null,
 
 
-                    Teacher = includeTeacher && c.Teacher != null
+                    Teacher = includeTeacher && c.NationalCodeNavigation != null
                         ? new
                         {
-                            c.Teacher.Id,
-                            c.Teacher.PersonalCode,
-                            c.Teacher.FirstName,
-                            c.Teacher.LastName,
-                            c.Teacher.AccountNumber,
-                            c.Teacher.InsuranceNumber,
-                            c.Teacher.NationalCode,
-                            c.Teacher.Grade,
-                            c.Teacher.Ranking
+                            c.NationalCodeNavigation.Id,
+                            c.NationalCodeNavigation.PersonalCode,
+                            c.NationalCodeNavigation.FirstName,
+                            c.NationalCodeNavigation.LastName,
+                            c.NationalCodeNavigation.AccountNumber,
+                            c.NationalCodeNavigation.InsuranceNumber,
+                            c.NationalCodeNavigation.NationalCode,
+                            c.NationalCodeNavigation.Grade,
+                            c.NationalCodeNavigation.Ranking
                         }
                         : null,
 
@@ -137,7 +137,7 @@ namespace ExclelToSql.Controllers
                 query = query.Include(c => c.Course);
 
             if (includeTeacher)
-                query = query.Include(c => c.Teacher);
+                query = query.Include(c => c.NationalCodeNavigation);
 
             if (includeSection)
                 query = query.Include(c => c.SectionNavigation);
@@ -158,7 +158,7 @@ namespace ExclelToSql.Controllers
                     Course = includeCourse && c.Course != null
                         ? new
                         {
-                            c.Course.Id,
+
                             c.Course.CourseId,
                             c.Course.CourseName,
                             c.Course.Theoretical,
@@ -168,18 +168,18 @@ namespace ExclelToSql.Controllers
                         : null,
 
 
-                    Teacher = includeTeacher && c.Teacher != null
+                    Teacher = includeTeacher && c.NationalCodeNavigation != null
                         ? new
                         {
-                            c.Teacher.Id,
-                            c.Teacher.PersonalCode,
-                            c.Teacher.FirstName,
-                            c.Teacher.LastName,
-                            c.Teacher.AccountNumber,
-                            c.Teacher.InsuranceNumber,
-                            c.Teacher.NationalCode,
-                            c.Teacher.Grade,
-                            c.Teacher.Ranking
+                            c.NationalCodeNavigation.Id,
+                            c.NationalCodeNavigation.PersonalCode,
+                            c.NationalCodeNavigation.FirstName,
+                            c.NationalCodeNavigation.LastName,
+                            c.NationalCodeNavigation.AccountNumber,
+                            c.NationalCodeNavigation.InsuranceNumber,
+                            c.NationalCodeNavigation.NationalCode,
+                            c.NationalCodeNavigation.Grade,
+                            c.NationalCodeNavigation.Ranking
                         }
                         : null,
 

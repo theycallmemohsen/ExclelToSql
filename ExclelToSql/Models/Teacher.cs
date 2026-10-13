@@ -12,6 +12,9 @@ public partial class Teacher
 
     [Key]
     [StringLength(50)]
+    public string NationalCode { get; set; } = null!;
+
+    [StringLength(50)]
     public string PersonalCode { get; set; } = null!;
 
     [StringLength(100)]
@@ -30,17 +33,36 @@ public partial class Teacher
     [StringLength(50)]
     public string? InsuranceNumber { get; set; }
 
-    [StringLength(50)]
-    public string? NationalCode { get; set; }
-
     public int? UpdateFlag { get; set; }
 
     public DateOnly? CreationDate { get; set; }
 
     public int? Duty { get; set; }
 
-    [InverseProperty("Teacher")]
+    public int? GroupCode { get; set; }
+
+    public int? SemesterCode { get; set; }
+
+    public int? CooperationType { get; set; }
+
+    [StringLength(50)]
+    public string? TempCooperationType { get; set; }
+
+    [StringLength(50)]
+    public string? TempGroupCode { get; set; }
+
+    [StringLength(50)]
+    public string? TempRanking { get; set; }
+
+    [StringLength(50)]
+    public string? TempDuty { get; set; }
+
+    [InverseProperty("NationalCodeNavigation")]
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
+    [ForeignKey("CooperationType")]
+    [InverseProperty("Teachers")]
+    public virtual Cooperation? CooperationTypeNavigation { get; set; }
 
     [ForeignKey("Duty")]
     [InverseProperty("Teachers")]
@@ -49,6 +71,10 @@ public partial class Teacher
     [ForeignKey("Grade")]
     [InverseProperty("Teachers")]
     public virtual Fee? GradeNavigation { get; set; }
+
+    [ForeignKey("GroupCode")]
+    [InverseProperty("Teachers")]
+    public virtual EducationalGroup? GroupCodeNavigation { get; set; }
 
     [ForeignKey("Ranking")]
     [InverseProperty("Teachers")]
