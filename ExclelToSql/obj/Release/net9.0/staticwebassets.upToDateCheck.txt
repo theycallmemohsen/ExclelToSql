@@ -64,6 +64,12 @@ wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\js\site.js
 wwwroot\favicon.ico
 wwwroot\css\site.css
+wwwroot\Uploads\ارائه‌ها.xlsx
+wwwroot\Uploads\اساتید.xlsx
+wwwroot\Uploads\دروس.xlsx
+wwwroot\Uploads\دروس_کدهای_اصلاح_شده.xlsx
+wwwroot\Uploads\سایر_اساتید.xlsx
+wwwroot\Uploads\گروه‌ها.xlsx
 C:\Users\Mohsen\Desktop\.Net\ExclelToSql\ExclelToSql\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\Mohsen\Desktop\.Net\ExclelToSql\ExclelToSql\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Mohsen\Desktop\.Net\ExclelToSql\ExclelToSql\wwwroot\lib\jquery\dist\jquery.slim.min.js
