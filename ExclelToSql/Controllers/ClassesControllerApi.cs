@@ -61,6 +61,8 @@ namespace ExclelToSql.Controllers
                     c.Section,
                     c.StudentsCount,
                     c.SessionsCount,
+                    c.SemesterCode,
+                    c.TempSemesterCode,
 
 
                     Course = includeCourse && c.Course != null
@@ -153,6 +155,8 @@ namespace ExclelToSql.Controllers
                     c.TeacherId,
                     c.Section,
                     c.StudentsCount,
+                    c.SemesterCode,
+                    c.TempSemesterCode,
 
 
                     Course = includeCourse && c.Course != null

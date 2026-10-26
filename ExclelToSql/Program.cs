@@ -49,8 +49,8 @@ builder.Services.AddSession(options =>
     options.Cookie.Name = ".AspNetCore.Session";
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
-    options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+    options.Cookie.SameSite = SameSiteMode.Lax;                    // not None
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
 
 
@@ -65,9 +65,6 @@ if (!app.Environment.IsDevelopment())
 //=============================
 //app.UseHttpsRedirection();
 //=============================
-
-app.UseRouting();
-
 app.UseCors("ReactPolicy");
 
 //------------------------
@@ -75,10 +72,20 @@ app.UseSession();
 //------------------------
 
 
+
+
+app.UseAuthentication();
+
+
 app.UseAuthorization();
 
 
+
 app.MapControllers();
+
+
+app.UseRouting();
+
 
 app.MapStaticAssets();
 

@@ -60,6 +60,9 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<UserLevel> UserLevels { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=.;Database=ExceltoSql; User Id = ExcelToSqlApp;Password = MyRealGoodProject;Encrypt=False;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -108,8 +111,6 @@ public partial class ExclelToSqlContext : DbContext
         modelBuilder.Entity<Nullteacher>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_NullTeachers");
-
-            entity.ToTable("NULLTeachers", tb => tb.HasTrigger("TR_NullTeachers_UpdateTeachers"));
         });
 
         modelBuilder.Entity<Ranking>(entity =>
@@ -142,6 +143,8 @@ public partial class ExclelToSqlContext : DbContext
             entity.HasOne(d => d.GroupCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_EducationalGroup");
 
             entity.HasOne(d => d.RankingNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Rankings");
+
+            entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Semester");
         });
 
         modelBuilder.Entity<User>(entity =>

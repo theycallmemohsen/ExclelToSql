@@ -79,4 +79,8 @@ public partial class Teacher
     [ForeignKey("Ranking")]
     [InverseProperty("Teachers")]
     public virtual Ranking? RankingNavigation { get; set; }
+
+    [ForeignKey("SemesterCode")]
+    [InverseProperty("Teachers")]
+    public virtual Semester? SemesterCodeNavigation { get; set; }
 }

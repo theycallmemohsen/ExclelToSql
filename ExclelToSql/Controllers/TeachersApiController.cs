@@ -31,6 +31,7 @@ namespace ExclelToSql.Controllers
             bool includeFee = false;
             bool includeRanking = false;
             bool includeDuty = false;
+            bool includeSemester = false;
 
             if (!string.IsNullOrWhiteSpace(expand))
             {
@@ -41,6 +42,7 @@ namespace ExclelToSql.Controllers
                 includeFee = expands.Contains("fee") || expands.Contains("all");
                 includeRanking = expands.Contains("ranking") || expands.Contains("all");
                 includeDuty = expands.Contains("duty") || expands.Contains("all");
+                includeSemester = expands.Contains("semester") || expands.Contains("all");
 
             }
 
@@ -99,6 +101,17 @@ namespace ExclelToSql.Controllers
                              t.DutyNavigation.Value
                          }
                         : null,
+                    SemesterInfo = includeSemester && t.SemesterCodeNavigation != null
+                         ? new
+                         {
+                             t.SemesterCodeNavigation.Id,
+                             t.SemesterCodeNavigation.SemesterCode,
+                             t.SemesterCodeNavigation.Title,
+
+
+                         }
+                        : null,
+
                 })
                 .ToListAsync();
 

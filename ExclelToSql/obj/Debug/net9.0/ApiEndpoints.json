@@ -26,6 +26,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ExclelToSql.Controllers.AuthController",
+    "Method": "SessionTest",
+    "RelativePath": "api/Auth/SessionTest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ExclelToSql.Controllers.ClassApi",
     "Method": "GetAll",
     "RelativePath": "api/ClassApi",
