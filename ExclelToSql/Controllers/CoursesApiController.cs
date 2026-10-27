@@ -18,11 +18,46 @@ namespace ExclelToSql.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await _context.Courses.ToListAsync();
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var data = await _context.Courses.ToListAsync();
 
-            return Ok(data);
+        //    return Ok(data);
+        //}
+        public async Task<IActionResult> GetCourses(
+        int page = 1,
+        int pageSize = 50)
+        {
+            if (page < 1)
+                page = 1;
+
+            if (pageSize < 1)
+                pageSize = 50;
+
+            pageSize = Math.Min(pageSize, 100);
+
+            // Build the query without fetching all records.
+            IQueryable<Course> query = _context.Courses.AsNoTracking();
+
+            // Count records before pagination.
+            int totalRecords = await query.CountAsync();
+
+            // Fetch only the requested page.
+            var courses = await query
+                .OrderBy(c => c.CourseId)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return Ok(new
+            {
+                TotalRecords = totalRecords,
+                Page = page,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(
+                    (double)totalRecords / pageSize),
+                Data = courses
+            });
         }
         [HttpGet("{CourseId}")]
         public async Task<IActionResult> GetById(int CourseId)
