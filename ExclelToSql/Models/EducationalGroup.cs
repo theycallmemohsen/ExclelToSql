@@ -15,6 +15,9 @@ public partial class EducationalGroup
     [StringLength(50)]
     public string? GroupName { get; set; }
 
+    [InverseProperty("Group")]
+    public virtual ICollection<Major> Majors { get; set; } = new List<Major>();
+
     [InverseProperty("GroupCodeNavigation")]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

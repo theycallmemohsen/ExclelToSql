@@ -18,7 +18,7 @@ namespace ExclelToSql.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _context.Fees.ToListAsync();
+            var data = await _context.NewFees.ToListAsync();
 
             return Ok(data);
         }

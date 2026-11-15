@@ -7,6 +7,8 @@
         public int? Section {  get; set; }  
         public int? StudentsCount {  get; set; }
         public int? SessionsCount { get; set; }
+        public int? MakeUpSessions { get; set; }
+
 
     }
 }

@@ -52,7 +52,7 @@ namespace ExclelToSql.Controllers
 
 
 
-            var result = await query
+           var result = await query
                 .Select(c => new
                 {
                     c.Id,
@@ -62,7 +62,8 @@ namespace ExclelToSql.Controllers
                     c.StudentsCount,
                     c.SessionsCount,
                     c.SemesterCode,
-                    c.TempSemesterCode,
+                    c.MakeUpSessions,
+            
 
 
                     Course = includeCourse && c.Course != null
@@ -156,7 +157,8 @@ namespace ExclelToSql.Controllers
                     c.Section,
                     c.StudentsCount,
                     c.SemesterCode,
-                    c.TempSemesterCode,
+                    c.MakeUpSessions,
+
 
 
                     Course = includeCourse && c.Course != null
@@ -286,6 +288,7 @@ namespace ExclelToSql.Controllers
                     Section = Class.Section,
                     StudentsCount = Class.StudentsCount,
                     SessionsCount = Class.SessionsCount,
+                    MakeUpSessions = Class.MakeUpSessions,
                     CreationDate = DateOnly.FromDateTime(DateTime.Now),
                     UpdateFlag = newUpdateFlag
 
@@ -307,6 +310,9 @@ namespace ExclelToSql.Controllers
 
                 if (request.SessionsCount.HasValue)
                     Class.SessionsCount = request.SessionsCount;
+
+                if (request.MakeUpSessions.HasValue)
+                    Class.MakeUpSessions = request.MakeUpSessions;
 
 
                 // PersonalCode is NEVER modified.

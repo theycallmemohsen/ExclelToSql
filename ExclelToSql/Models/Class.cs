@@ -34,14 +34,13 @@ public partial class Class
     [StringLength(50)]
     public string? PresentationCode { get; set; }
 
-    [StringLength(50)]
-    public string? TempGroupCode { get; set; }
-
     [StringLength(200)]
-    public string? TempCourseId { get; set; }
+    public string? TempCourse { get; set; }
 
-    [StringLength(10)]
-    public string? TempSemesterCode { get; set; }
+    [StringLength(50)]
+    public string? TempSection { get; set; }
+
+    public int? MakeUpSessions { get; set; }
 
     [ForeignKey("CourseId")]
     [InverseProperty("Classes")]

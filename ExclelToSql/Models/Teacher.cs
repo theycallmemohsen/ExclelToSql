@@ -46,16 +46,7 @@ public partial class Teacher
     public int? CooperationType { get; set; }
 
     [StringLength(50)]
-    public string? TempCooperationType { get; set; }
-
-    [StringLength(50)]
-    public string? TempGroupCode { get; set; }
-
-    [StringLength(50)]
-    public string? TempRanking { get; set; }
-
-    [StringLength(50)]
-    public string? TempDuty { get; set; }
+    public string? PhoneNumber { get; set; }
 
     [InverseProperty("NationalCodeNavigation")]
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
@@ -67,6 +58,10 @@ public partial class Teacher
     [ForeignKey("Duty")]
     [InverseProperty("Teachers")]
     public virtual Duty? DutyNavigation { get; set; }
+
+    [ForeignKey("Grade")]
+    [InverseProperty("Teachers")]
+    public virtual NewFee? Grade1 { get; set; }
 
     [ForeignKey("Grade")]
     [InverseProperty("Teachers")]

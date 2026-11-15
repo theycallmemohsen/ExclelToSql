@@ -38,9 +38,15 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<Excel> Excels { get; set; }
 
+    public virtual DbSet<Faculty> Faculties { get; set; }
+
     public virtual DbSet<Fee> Fees { get; set; }
 
     public virtual DbSet<Information> Information { get; set; }
+
+    public virtual DbSet<Major> Majors { get; set; }
+
+    public virtual DbSet<NewFee> NewFees { get; set; }
 
     public virtual DbSet<Nullteacher> Nullteachers { get; set; }
 
@@ -55,6 +61,12 @@ public partial class ExclelToSqlContext : DbContext
     public virtual DbSet<Teacher> Teachers { get; set; }
 
     public virtual DbSet<TeachersHistory> TeachersHistories { get; set; }
+
+    public virtual DbSet<TempSection> TempSections { get; set; }
+
+    public virtual DbSet<TempTeacher> TempTeachers { get; set; }
+
+    public virtual DbSet<TempTeachers2> TempTeachers2s { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -81,7 +93,7 @@ public partial class ExclelToSqlContext : DbContext
 
             entity.HasOne(d => d.NationalCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Teachers");
 
-            entity.HasOne(d => d.SectionNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Section");
+            entity.HasOne(d => d.SectionNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Sections");
 
             entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Semester");
         });
@@ -106,6 +118,15 @@ public partial class ExclelToSqlContext : DbContext
         modelBuilder.Entity<Information>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<Major>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_NewInformation");
+
+            entity.HasOne(d => d.FacultyNavigation).WithMany(p => p.Majors).HasConstraintName("FK_NewInformation_Faculty");
+
+            entity.HasOne(d => d.Group).WithMany(p => p.Majors).HasConstraintName("FK_NewInformation_EducationalGroup");
         });
 
         modelBuilder.Entity<Nullteacher>(entity =>
@@ -139,6 +160,8 @@ public partial class ExclelToSqlContext : DbContext
             entity.HasOne(d => d.DutyNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Duty");
 
             entity.HasOne(d => d.GradeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Fee");
+
+            entity.HasOne(d => d.Grade1).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_NewFee");
 
             entity.HasOne(d => d.GroupCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_EducationalGroup");
 

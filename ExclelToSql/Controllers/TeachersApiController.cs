@@ -47,7 +47,7 @@ namespace ExclelToSql.Controllers
             }
 
             if (includeFee)
-                query = query.Include(t => t.GradeNavigation);
+                query = query.Include(t => t.Grade1);
 
             if (includeRanking)
                 query = query.Include(t => t.RankingNavigation);
@@ -68,20 +68,19 @@ namespace ExclelToSql.Controllers
                     t.Grade,
                     t.Ranking,
                     t.Duty,
-                    t.TempCooperationType,
-                    t.TempGroupCode,
+                    t.GroupCode,
+                    t.PhoneNumber,
 
-                    Fee = includeFee && t.GradeNavigation != null
+                    Fee = includeFee && t.Grade1 != null
                         ? new
                         {
-                            t.GradeNavigation.Grade,
-                            t.GradeNavigation.BachelorTeacher,
-                            t.GradeNavigation.MastersTeacher,
-                            t.GradeNavigation.MastersTrainer,
-                            t.GradeNavigation.Phdtrainer,
-                            t.GradeNavigation.AssistantTeacher,
-                            t.GradeNavigation.AssociateTeacher,
-                            t.GradeNavigation.Teacher
+                            t.Grade,
+                            t.Grade1.AssistantMasterSDegree,
+                            t.Grade1.InstructorEquivalentToAPhD,
+                            t.Grade1.AssistantProfessor,
+                            t.Grade1.AssociateProfessor,
+                            t.Grade1.Professor,
+
                         }
                         : null,
 
@@ -142,7 +141,7 @@ namespace ExclelToSql.Controllers
             }
 
             if (includeFee)
-                query = query.Include(t => t.GradeNavigation);
+                query = query.Include(t => t.Grade1);
 
             if (includeRanking)
                 query = query.Include(t => t.RankingNavigation);
@@ -164,21 +163,20 @@ namespace ExclelToSql.Controllers
                     t.Grade,
                     t.Ranking,
                     t.Duty,
-                    t.TempCooperationType,
-                    t.TempGroupCode,
+                    t.GroupCode,
+                    t.PhoneNumber,
 
 
-                    Fee = includeFee && t.GradeNavigation != null
+
+                    Fee = includeFee && t.Grade1 != null
                         ? new
                         {
-                            t.GradeNavigation.Grade,
-                            t.GradeNavigation.BachelorTeacher,
-                            t.GradeNavigation.MastersTeacher,
-                            t.GradeNavigation.MastersTrainer,
-                            t.GradeNavigation.Phdtrainer,
-                            t.GradeNavigation.AssistantTeacher,
-                            t.GradeNavigation.AssociateTeacher,
-                            t.GradeNavigation.Teacher
+                            t.Grade,
+                            t.Grade1.AssistantMasterSDegree,
+                            t.Grade1.InstructorEquivalentToAPhD,
+                            t.Grade1.AssistantProfessor,
+                            t.Grade1.AssociateProfessor,
+                            t.Grade1.Professor,
                         }
                         : null,
 

@@ -58,6 +58,7 @@ namespace ExclelToSql.Controllers
                     (double)totalRecords / pageSize),
                 Data = courses
             });
+            // http://localhost:5000/api/CoursesApi?page=1&pageSize=50
         }
         [HttpGet("{CourseId}")]
         public async Task<IActionResult> GetById(int CourseId)

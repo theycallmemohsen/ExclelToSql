@@ -122,6 +122,7 @@ using ExclelToSql.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 
 namespace ExclelToSql.Controllers
@@ -239,49 +240,48 @@ namespace ExclelToSql.Controllers
                                 //}
 
 
-                                OtherTeacher C = new OtherTeacher();
+                                TempTeachers2 C = new TempTeachers2();
                                 //===============================================================================
-                                string value = reader.GetValue(0)?.ToString()?.Trim() ?? "";
+                                string value1 = reader.GetValue(0)?.ToString()?.Trim() ?? "";
 
-                                value = value
-                                    .Replace('۰', '0').Replace('۱', '1')
-                                    .Replace('۲', '2').Replace('۳', '3')
-                                    .Replace('۴', '4').Replace('۵', '5')
-                                    .Replace('۶', '6').Replace('۷', '7')
-                                    .Replace('۸', '8').Replace('۹', '9')
-                                    .Replace('٠', '0').Replace('١', '1')
-                                    .Replace('٢', '2').Replace('٣', '3')
-                                    .Replace('٤', '4').Replace('٥', '5')
-                                    .Replace('٦', '6').Replace('٧', '7')
-                                    .Replace('٨', '8').Replace('٩', '9');
-
-                                C.PresentationCode = string.IsNullOrWhiteSpace(value) ? null : value;
+                                C.TempCooperationType = string.IsNullOrWhiteSpace(value1) ? null : value1;
 
                                 string value2 = reader.GetValue(1)?.ToString()?.Trim() ?? "";
 
-                                value2 = value2
-                                    .Replace('۰', '0').Replace('۱', '1')
-                                    .Replace('۲', '2').Replace('۳', '3')
-                                    .Replace('۴', '4').Replace('۵', '5')
-                                    .Replace('۶', '6').Replace('۷', '7')
-                                    .Replace('۸', '8').Replace('۹', '9')
-                                    .Replace('٠', '0').Replace('١', '1')
-                                    .Replace('٢', '2').Replace('٣', '3')
-                                    .Replace('٤', '4').Replace('٥', '5')
-                                    .Replace('٦', '6').Replace('٧', '7')
-                                    .Replace('٨', '8').Replace('٩', '9');
-
-                                C.TeacherId = string.IsNullOrWhiteSpace(value2) ? null : value2;
-
+                                C.PersonalCode = string.IsNullOrWhiteSpace(value2) ? null : value2;
                                 string value3 = reader.GetValue(2)?.ToString()?.Trim() ?? "";
 
-                                C.TeacherFullName = string.IsNullOrWhiteSpace(value3) ? null : value3;
-
+                                C.FirstName = string.IsNullOrWhiteSpace(value3) ? null : value3;
                                 string value4 = reader.GetValue(3)?.ToString()?.Trim() ?? "";
 
-                                C.Role = string.IsNullOrWhiteSpace(value4) ? null : value4;
+                                C.LastName = string.IsNullOrWhiteSpace(value4) ? null : value4;
+                                string value5 = reader.GetValue(4)?.ToString()?.Trim() ?? "";
 
-                                _context.OtherTeachers.Add(C);
+                                C.TempRanking = string.IsNullOrWhiteSpace(value5) ? null : value5;
+
+                                string value6 = reader.GetValue(5)?.ToString()?.Trim() ?? "";
+
+                                C.Grade = int.TryParse(value6, NumberStyles.Integer, CultureInfo.InvariantCulture, out int grade)
+                                    ? grade
+                                    : (int?)null;
+                                string value7 = reader.GetValue(6)?.ToString()?.Trim() ?? "";
+
+                                C.NationalCode = string.IsNullOrWhiteSpace(value7) ? null : value7;
+
+                                string value8 = reader.GetValue(7)?.ToString()?.Trim() ?? "";
+
+                                C.AccountNumber = string.IsNullOrWhiteSpace(value8) ? null : value8;
+
+                                string value9 = reader.GetValue(8)?.ToString()?.Trim() ?? "";
+
+                                C.InsuranceNumber = string.IsNullOrWhiteSpace(value9) ? null : value9;
+
+                                string value10 = reader.GetValue(9)?.ToString()?.Trim() ?? "";
+
+                                C.PhoneNumber = string.IsNullOrWhiteSpace(value10) ? null : value10;
+
+
+                                _context.TempTeachers2s.Add(C);
                                 inserted++;
                                 //================================================================
                             }

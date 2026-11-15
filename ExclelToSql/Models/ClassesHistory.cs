@@ -25,6 +25,8 @@ public partial class ClassesHistory
 
     public int? SessionsCount { get; set; }
 
+    public int? MakeUpSessions { get; set; }
+
     public DateOnly? CreationDate { get; set; }
 
     public int? UpdateFlag { get; set; }
