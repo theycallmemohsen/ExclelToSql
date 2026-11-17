@@ -3,24 +3,92 @@
   "WorkspaceRootPath": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\coursesapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\coursesapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Data\\ExceltoSqlContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ExclelToSql\\Data\\ExceltoSqlContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\migrations\\excleltosqlcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\migrations\\excleltosqlcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\migrations\\20260625113400_new table.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\migrations\\20260625113400_new table.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\migrations\\20260624171043_second excel.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\migrations\\20260624171043_second excel.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\migrations\\20260623104724_testnullable.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\migrations\\20260623104724_testnullable.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\teachersemestersapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\teachersemestersapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\teachersapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\teachersapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\models\\dto\\teacherchangerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\models\\dto\\teacherchangerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\teacherapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\teacherapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\sectionapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\sectionapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\rankingapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\rankingapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\nullteachersapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\nullteachersapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\feeapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\feeapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\excelapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\excelapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\dutycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\dutycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\courseapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\courseapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\classapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\classapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\data\\excleltosqlcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\data\\excleltosqlcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\controllers\\classescontrollerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\controllers\\classescontrollerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|c:\\users\\mohsen\\desktop\\.net\\excleltosql\\excleltosql\\models\\major.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE68F36B-94B5-4ED4-AFE2-31DAAF0DAA7F}|ExclelToSql\\ExclelToSql.csproj|solutionrelative:excleltosql\\models\\major.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,8 +98,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20260625113400_New Table.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260625113400_New Table.Designer.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Migrations\\20260625113400_New Table.Designer.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260625113400_New Table.Designer.cs",
+              "RelativeToolTip": "ExclelToSql\\Migrations\\20260625113400_New Table.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:14:08.983Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -42,66 +124,275 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TeacherChangeRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Models\\DTO\\TeacherChangeRequest.cs",
-              "RelativeDocumentMoniker": "ExclelToSql\\Models\\DTO\\TeacherChangeRequest.cs",
-              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Models\\DTO\\TeacherChangeRequest.cs",
-              "RelativeToolTip": "ExclelToSql\\Models\\DTO\\TeacherChangeRequest.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-13T10:39:49.445Z",
+              "WhenOpened": "2026-11-17T09:06:33.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CoursesApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\CoursesApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\CoursesApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\CoursesApiController.cs*",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\CoursesApiController.cs*",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAYwIAAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:12:56.101Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "TeachersApiController.cs",
-              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeachersApiController.cs",
-              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\TeachersApiController.cs",
-              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeachersApiController.cs",
-              "RelativeToolTip": "ExclelToSql\\Controllers\\TeachersApiController.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Title": "ExclelToSqlContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\ExclelToSqlContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Migrations\\ExclelToSqlContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\ExclelToSqlContextModelSnapshot.cs",
+              "RelativeToolTip": "ExclelToSql\\Migrations\\ExclelToSqlContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-13T08:54:59.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ExceltoSqlContext.cs",
-              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Data\\ExceltoSqlContext.cs",
-              "RelativeDocumentMoniker": "ExclelToSql\\Data\\ExceltoSqlContext.cs",
-              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Data\\ExceltoSqlContext.cs*",
-              "RelativeToolTip": "ExclelToSql\\Data\\ExceltoSqlContext.cs*",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEoAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-07T12:49:11.036Z",
+              "WhenOpened": "2026-11-17T11:14:21.722Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "20260624171043_Second Excel.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260624171043_Second Excel.Designer.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Migrations\\20260624171043_Second Excel.Designer.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260624171043_Second Excel.Designer.cs",
+              "RelativeToolTip": "ExclelToSql\\Migrations\\20260624171043_Second Excel.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:14:04.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20260623104724_TestNullable.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260623104724_TestNullable.Designer.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Migrations\\20260623104724_TestNullable.Designer.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Migrations\\20260623104724_TestNullable.Designer.cs",
+              "RelativeToolTip": "ExclelToSql\\Migrations\\20260623104724_TestNullable.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:14:00.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TeacherSemestersApi.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeacherSemestersApi.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\TeacherSemestersApi.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeacherSemestersApi.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\TeacherSemestersApi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:52.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TeachersApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeachersApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\TeachersApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\TeachersApiController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\TeachersApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:47.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Teacherapi.cs",
               "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\Teacherapi.cs",
               "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\Teacherapi.cs",
               "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\Teacherapi.cs",
               "RelativeToolTip": "ExclelToSql\\Controllers\\Teacherapi.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-20T10:45:33.063Z"
+              "WhenOpened": "2026-11-17T11:13:40.12Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
+              "Title": "SectionApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\SectionApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\SectionApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\SectionApiController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\SectionApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:36.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RankingApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\RankingApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\RankingApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\RankingApiController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\RankingApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:32.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NullTeachersApi.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\NullTeachersApi.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\NullTeachersApi.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\NullTeachersApi.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\NullTeachersApi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:25.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\HomeController.cs*",
-              "RelativeToolTip": "ExclelToSql\\Controllers\\HomeController.cs*",
-              "ViewState": "AgIAAOoAAAAAAAAAAAAswBsBAAA/AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAnwIYAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-02T10:58:47.347Z",
+              "WhenOpened": "2026-11-17T11:13:14.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FeeApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\FeeApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\FeeApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\FeeApiController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\FeeApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:09.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ExcelApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ExcelApiController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\ExcelApiController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ExcelApiController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\ExcelApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:05.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DutyController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\DutyController.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\DutyController.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\DutyController.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\DutyController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:13:00.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CourseApi.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\CourseApi.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\CourseApi.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\CourseApi.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\CourseApi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:12:48.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClassApi.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ClassApi.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\ClassApi.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ClassApi.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\ClassApi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:12:42.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ExclelToSqlContext.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Data\\ExclelToSqlContext.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Data\\ExclelToSqlContext.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Data\\ExclelToSqlContext.cs",
+              "RelativeToolTip": "ExclelToSql\\Data\\ExclelToSqlContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T11:04:04.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ClassesControllerApi.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ClassesControllerApi.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Controllers\\ClassesControllerApi.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Controllers\\ClassesControllerApi.cs",
+              "RelativeToolTip": "ExclelToSql\\Controllers\\ClassesControllerApi.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAgwPkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T10:43:35.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Major.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Models\\Major.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Models\\Major.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Models\\Major.cs",
+              "RelativeToolTip": "ExclelToSql\\Models\\Major.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T09:48:42.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Program.cs",
+              "RelativeDocumentMoniker": "ExclelToSql\\Program.cs",
+              "ToolTip": "C:\\Users\\Mohsen\\Desktop\\.Net\\ExclelToSql\\ExclelToSql\\Program.cs",
+              "RelativeToolTip": "ExclelToSql\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-17T09:38:02.54Z",
               "EditorCaption": ""
             }
           ]

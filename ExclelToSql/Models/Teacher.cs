@@ -10,10 +10,10 @@ public partial class Teacher
 {
     public int Id { get; set; }
 
-    [Key]
     [StringLength(50)]
     public string NationalCode { get; set; } = null!;
 
+    [Key]
     [StringLength(50)]
     public string PersonalCode { get; set; } = null!;
 
@@ -48,7 +48,7 @@ public partial class Teacher
     [StringLength(50)]
     public string? PhoneNumber { get; set; }
 
-    [InverseProperty("NationalCodeNavigation")]
+    [InverseProperty("Teacher")]
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
     [ForeignKey("CooperationType")]
@@ -61,11 +61,7 @@ public partial class Teacher
 
     [ForeignKey("Grade")]
     [InverseProperty("Teachers")]
-    public virtual NewFee? Grade1 { get; set; }
-
-    [ForeignKey("Grade")]
-    [InverseProperty("Teachers")]
-    public virtual Fee? GradeNavigation { get; set; }
+    public virtual NewFee? GradeNavigation { get; set; }
 
     [ForeignKey("GroupCode")]
     [InverseProperty("Teachers")]
@@ -76,6 +72,10 @@ public partial class Teacher
     public virtual Ranking? RankingNavigation { get; set; }
 
     [ForeignKey("SemesterCode")]
-    [InverseProperty("Teachers")]
+    [InverseProperty("TeachersNavigation")]
     public virtual Semester? SemesterCodeNavigation { get; set; }
+
+    [ForeignKey("TeacherId")]
+    [InverseProperty("Teachers")]
+    public virtual ICollection<Semester> SemesterCodes { get; set; } = new List<Semester>();
 }

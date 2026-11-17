@@ -72,10 +72,7 @@ public partial class ExclelToSqlContext : DbContext
 
     public virtual DbSet<UserLevel> UserLevels { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=ExceltoSql; User Id = ExcelToSqlApp;Password = MyRealGoodProject;Encrypt=False;TrustServerCertificate=True");
-
+ 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Archive>(entity =>
@@ -91,11 +88,13 @@ public partial class ExclelToSqlContext : DbContext
 
             entity.HasOne(d => d.Course).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Courses");
 
-            entity.HasOne(d => d.NationalCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Teachers");
+            entity.HasOne(d => d.GroupCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_EducationalGroup");
 
             entity.HasOne(d => d.SectionNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Sections");
 
             entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Semester");
+
+            entity.HasOne(d => d.Teacher).WithMany(p => p.Classes).HasConstraintName("FK_Classes_Teachers");
         });
 
         modelBuilder.Entity<Cooperation>(entity =>
@@ -122,11 +121,13 @@ public partial class ExclelToSqlContext : DbContext
 
         modelBuilder.Entity<Major>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_NewInformation");
+            entity.HasKey(e => e.Id).HasName("PK_Majors_1");
 
             entity.HasOne(d => d.FacultyNavigation).WithMany(p => p.Majors).HasConstraintName("FK_NewInformation_Faculty");
 
-            entity.HasOne(d => d.Group).WithMany(p => p.Majors).HasConstraintName("FK_NewInformation_EducationalGroup");
+            entity.HasOne(d => d.Group).WithMany(p => p.Majors)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Majors_EducationalGroup");
         });
 
         modelBuilder.Entity<Nullteacher>(entity =>
@@ -151,23 +152,37 @@ public partial class ExclelToSqlContext : DbContext
 
         modelBuilder.Entity<Teacher>(entity =>
         {
-            entity.HasKey(e => e.NationalCode).HasName("PK__Teachers__63E2562B4A68B111");
-
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
             entity.HasOne(d => d.CooperationTypeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Cooperation");
 
             entity.HasOne(d => d.DutyNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Duty");
 
-            entity.HasOne(d => d.GradeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Fee");
-
-            entity.HasOne(d => d.Grade1).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_NewFee");
+            entity.HasOne(d => d.GradeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_NewFee");
 
             entity.HasOne(d => d.GroupCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_EducationalGroup");
 
             entity.HasOne(d => d.RankingNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Rankings");
 
-            entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.Teachers).HasConstraintName("FK_Teachers_Semester");
+            entity.HasOne(d => d.SemesterCodeNavigation).WithMany(p => p.TeachersNavigation).HasConstraintName("FK_Teachers_Semester");
+
+            entity.HasMany(d => d.SemesterCodes).WithMany(p => p.Teachers)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CompositeSemester",
+                    r => r.HasOne<Semester>().WithMany()
+                        .HasForeignKey("SemesterCode")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_TeacherSemesters_Semester"),
+                    l => l.HasOne<Teacher>().WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_TeacherSemesters_Teachers"),
+                    j =>
+                    {
+                        j.HasKey("TeacherId", "SemesterCode").HasName("PK_TeacherSemesters");
+                        j.ToTable("CompositeSemester");
+                        j.IndexerProperty<string>("TeacherId").HasMaxLength(50);
+                    });
         });
 
         modelBuilder.Entity<User>(entity =>

@@ -16,6 +16,15 @@
 
         public string? NationalCode { get; set; }
         public int? Duty { get; set; }
+        public int? CooperationType { get; set; }
+
+        public int? SemesterCode { get; set; }
+        public string? PhoneNumber { get; set; }
+        public int? GroupCode { get; set; }
+        public string? PersonalCode { get; set; }
+
+
+
 
     }
 }

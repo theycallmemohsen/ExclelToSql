@@ -25,5 +25,9 @@ public partial class Semester
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
     [InverseProperty("SemesterCodeNavigation")]
+    public virtual ICollection<Teacher> TeachersNavigation { get; set; } = new List<Teacher>();
+
+    [ForeignKey("SemesterCode")]
+    [InverseProperty("SemesterCodes")]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

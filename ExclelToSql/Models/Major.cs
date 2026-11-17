@@ -13,7 +13,7 @@ public partial class Major
 
     public int? FacultyId { get; set; }
 
-    public int? GroupId { get; set; }
+    public int GroupId { get; set; }
 
     [StringLength(50)]
     public string? Faculty { get; set; }
@@ -31,5 +31,5 @@ public partial class Major
 
     [ForeignKey("GroupId")]
     [InverseProperty("Majors")]
-    public virtual EducationalGroup? Group { get; set; }
+    public virtual EducationalGroup Group { get; set; } = null!;
 }

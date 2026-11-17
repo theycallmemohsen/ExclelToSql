@@ -26,6 +26,6 @@ public partial class NewFee
 
     public int? Professor { get; set; }
 
-    [InverseProperty("Grade1")]
+    [InverseProperty("GradeNavigation")]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

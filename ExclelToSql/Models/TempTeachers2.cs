@@ -40,4 +40,8 @@ public partial class TempTeachers2
 
     [StringLength(50)]
     public string? PhoneNumber { get; set; }
+
+    public int? CooperationType { get; set; }
+
+    public int? Ranking { get; set; }
 }

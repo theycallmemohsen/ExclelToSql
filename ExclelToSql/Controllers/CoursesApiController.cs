@@ -17,34 +17,102 @@ namespace ExclelToSql.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        //public async Task<IActionResult> GetAll()
+        //[HttpGet]
+        ////public async Task<IActionResult> GetAll()
+        ////{
+        ////    var data = await _context.Courses.ToListAsync();
+
+        ////    return Ok(data);
+        ////}
+        //public async Task<IActionResult> GetCourses(
+        //int page = 1,
+        //int pageSize = 50)
         //{
-        //    var data = await _context.Courses.ToListAsync();
+        //    if (page < 1)
+        //        page = 1;
 
-        //    return Ok(data);
-        //}
+        //    if (pageSize < 1)
+        //        pageSize = 50;
+
+        //    pageSize = Math.Min(pageSize, 100);
+
+        //    // Build the query without fetching all records.
+        //    IQueryable<Course> query = _context.Courses.AsNoTracking();
+
+        //    // Count records before pagination.
+        //    int totalRecords = await query.CountAsync();
+
+        //    // Fetch only the requested page.
+        //    var courses = await query
+        //        .OrderBy(c => c.CourseId)
+        //        .Skip((page - 1) * pageSize)
+        //        .Take(pageSize)
+        //        .ToListAsync();
+
+        //    return Ok(new
+        //    {
+        //        TotalRecords = totalRecords,
+        //        Page = page,
+        //        PageSize = pageSize,
+        //        TotalPages = (int)Math.Ceiling(
+        //            (double)totalRecords / pageSize),
+        //        Data = courses
+        //    });
+
+        //NEW SEARCHING CODES
+
+        [HttpGet]
         public async Task<IActionResult> GetCourses(
-        int page = 1,
-        int pageSize = 50)
+    int page = 1,
+    int pageSize = 50,
+    string? search = null,          // text typed in the search box
+    int? minCredits = null,         // example numeric filters
+    int? maxCredits = null,
+    string? sortBy = "courseId",    // courseId | courseName | credits
+    bool desc = false)
         {
-            if (page < 1)
-                page = 1;
-
-            if (pageSize < 1)
-                pageSize = 50;
-
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 50;
             pageSize = Math.Min(pageSize, 100);
 
-            // Build the query without fetching all records.
             IQueryable<Course> query = _context.Courses.AsNoTracking();
 
-            // Count records before pagination.
+            // ---- Search ----
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var s = search.Trim()
+                    .Replace('ي', 'ی')      // normalize Arabic letters to Persian
+                    .Replace('ك', 'ک');
+
+                // numeric search matches the CourseId, text matches the name
+                if (int.TryParse(s, out var id))
+                    query = query.Where(c => c.CourseId == id || EF.Functions.Like(c.CourseName, $"%{s}%"));
+                else
+                    query = query.Where(c => EF.Functions.Like(c.CourseName, $"%{s}%"));
+            }
+
+            // ---- Filters ----
+            if (minCredits.HasValue)
+                query = query.Where(c => c.CreditsCoefficients >= minCredits.Value);
+            if (maxCredits.HasValue)
+                query = query.Where(c => c.CreditsCoefficients <= maxCredits.Value);
+
+            // ---- Count AFTER filtering, BEFORE paging ----
             int totalRecords = await query.CountAsync();
 
-            // Fetch only the requested page.
+            // ---- Sorting (whitelist, never sort by a raw string from the client) ----
+            query = (sortBy?.ToLower(), desc) switch
+            {
+                ("coursename", false) => query.OrderBy(c => c.CourseName).ThenBy(c => c.CourseId),
+                ("coursename", true) => query.OrderByDescending(c => c.CourseName).ThenBy(c => c.CourseId),
+                ("credits", false) => query.OrderBy(c => c.CreditsCoefficients).ThenBy(c => c.CourseId),
+                ("credits", true) => query.OrderByDescending(c => c.CreditsCoefficients).ThenBy(c => c.CourseId),
+                (_, true) => query.OrderByDescending(c => c.CourseId),
+                _ => query.OrderBy(c => c.CourseId),
+            };
+
+            // ---- Paging ----
             var courses = await query
-                .OrderBy(c => c.CourseId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -54,12 +122,12 @@ namespace ExclelToSql.Controllers
                 TotalRecords = totalRecords,
                 Page = page,
                 PageSize = pageSize,
-                TotalPages = (int)Math.Ceiling(
-                    (double)totalRecords / pageSize),
+                TotalPages = (int)Math.Ceiling((double)totalRecords / pageSize),
                 Data = courses
             });
-            // http://localhost:5000/api/CoursesApi?page=1&pageSize=50
         }
+        // /api/CoursesApi?page=1&pageSize=50&search=فیزیک&minCredits=2&sortBy=courseName
+
         [HttpGet("{CourseId}")]
         public async Task<IActionResult> GetById(int CourseId)
         {

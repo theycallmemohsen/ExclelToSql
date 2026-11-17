@@ -27,6 +27,9 @@ namespace ExclelToSql.Controllers
             bool includeCourse = false;
             bool includeTeacher = false;
             bool includeSection = false;
+            bool includesemester = false;
+            bool includegroup = false;
+
 
 
             if (!string.IsNullOrWhiteSpace(expand))
@@ -35,9 +38,13 @@ namespace ExclelToSql.Controllers
                     .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                     .Select(x => x.ToLower());
 
-                includeCourse = expands.Contains("courseid") || expands.Contains("all");
-                includeTeacher = expands.Contains("teacherid") || expands.Contains("all");
+                includeCourse = expands.Contains("course") || expands.Contains("all");
+                includeTeacher = expands.Contains("teacher") || expands.Contains("all");
                 includeSection = expands.Contains("section") || expands.Contains("all");
+                includesemester = expands.Contains("semester") || expands.Contains("all");
+                includegroup = expands.Contains("group") || expands.Contains("all");
+
+
             }
 
 
@@ -45,66 +52,83 @@ namespace ExclelToSql.Controllers
                 query = query.Include(c => c.Course);
 
             if (includeTeacher)
-                query = query.Include(c => c.NationalCodeNavigation);
+                query = query.Include(c => c.Teacher);
 
             if (includeSection)
                 query = query.Include(c => c.SectionNavigation);
 
+            if (includesemester)
+                query = query.Include(c => c.SemesterCodeNavigation);
 
 
-           var result = await query
-                .Select(c => new
-                {
-                    c.Id,
-                    c.CourseId,
-                    c.TeacherId,
-                    c.Section,
-                    c.StudentsCount,
-                    c.SessionsCount,
-                    c.SemesterCode,
-                    c.MakeUpSessions,
-            
+            if (includegroup)
+                query = query.Include(c => c.GroupCodeNavigation);
 
 
-                    Course = includeCourse && c.Course != null
-                        ? new
-                        {
-                            
-                            c.Course.CourseId,
-                            c.Course.CourseName,
-                            c.Course.Theoretical,
-                            c.Course.Practical,
-                            c.Course.CreditsCoefficients
-                        }
-                        : null,
+            var result = await query
+                 .Select(c => new
+                 {
+                     c.Id,
+                     c.NationalCode,
+                     c.CourseId,
+                     c.TeacherId,
+                     c.Section,
+                     c.StudentsCount,
+                     c.SessionsCount,
+                     c.GroupCode,
+                     c.SemesterCode,
+                     c.PresentationCode,
+                     c.MakeUpSessions,
 
 
-                    Teacher = includeTeacher && c.NationalCodeNavigation != null
-                        ? new
-                        {
-                            c.NationalCodeNavigation.Id,
-                            c.NationalCodeNavigation.PersonalCode,
-                            c.NationalCodeNavigation.FirstName,
-                            c.NationalCodeNavigation.LastName,
-                            c.NationalCodeNavigation.AccountNumber,
-                            c.NationalCodeNavigation.InsuranceNumber,
-                            c.NationalCodeNavigation.NationalCode,
-                            c.NationalCodeNavigation.Grade,
-                            c.NationalCodeNavigation.Ranking
-                        }
-                        : null,
+
+                     Course = includeCourse && c.Course != null
+                         ? new
+                         {
+
+                             c.Course.CourseId,
+                             c.Course.CourseName,
+                             c.Course.Theoretical,
+                             c.Course.Practical,
+                             c.Course.CreditsCoefficients
+                         }
+                         : null,
 
 
-                    SectionInfo = includeSection && c.SectionNavigation != null
-                        ? new
-                        {
-                            c.SectionNavigation.Id,
-                            c.SectionNavigation.Section1
-                        }
-                        : null
+                     Teacher = includeTeacher && c.Teacher != null
+                         ? new
+                         {
+                             c.Teacher.Id,
+                             c.Teacher.PersonalCode,
+                             c.Teacher.FirstName,
+                             c.Teacher.LastName,
+                             c.Teacher.AccountNumber,
+                             c.Teacher.InsuranceNumber,
+                             c.Teacher.NationalCode,
+                             c.Teacher.Grade,
+                             c.Teacher.Ranking
+                         }
+                         : null,
 
-                })
-                .ToListAsync();
+
+                     SectionInfo = includeSection && c.SectionNavigation != null
+                         ? new
+                         {
+                             c.SectionNavigation.Id,
+                             c.SectionNavigation.Section1
+                         }
+                         : null,
+                     Group = includegroup && c.GroupCodeNavigation != null
+                         ? new
+                         {
+                             c.GroupCodeNavigation.Id,
+                             c.GroupCodeNavigation.GroupName,
+
+                         }
+                         : null
+
+                 })
+                 .ToListAsync();
 
 
             return Ok(result);
@@ -122,6 +146,10 @@ namespace ExclelToSql.Controllers
             bool includeCourse = false;
             bool includeTeacher = false;
             bool includeSection = false;
+            bool includesemester = false;
+            bool includegroup = false;
+
+
 
 
             if (!string.IsNullOrWhiteSpace(expand))
@@ -133,6 +161,10 @@ namespace ExclelToSql.Controllers
                 includeCourse = expands.Contains("courseid") || expands.Contains("all");
                 includeTeacher = expands.Contains("teacherid") || expands.Contains("all");
                 includeSection = expands.Contains("section") || expands.Contains("all");
+                includesemester = expands.Contains("semester") || expands.Contains("all");
+                includegroup = expands.Contains("group") || expands.Contains("all");
+
+
             }
 
 
@@ -140,10 +172,16 @@ namespace ExclelToSql.Controllers
                 query = query.Include(c => c.Course);
 
             if (includeTeacher)
-                query = query.Include(c => c.NationalCodeNavigation);
+                query = query.Include(c => c.Teacher);
 
             if (includeSection)
                 query = query.Include(c => c.SectionNavigation);
+
+            if (includesemester)
+                query = query.Include(c => c.SemesterCodeNavigation);
+
+            if (includegroup)
+                query = query.Include(c => c.GroupCodeNavigation);
 
 
 
@@ -152,11 +190,15 @@ namespace ExclelToSql.Controllers
                 .Select(c => new
                 {
                     c.Id,
+                    c.NationalCode,
                     c.CourseId,
                     c.TeacherId,
                     c.Section,
                     c.StudentsCount,
+                    c.SessionsCount,
+                    c.GroupCode,
                     c.SemesterCode,
+                    c.PresentationCode,
                     c.MakeUpSessions,
 
 
@@ -174,18 +216,18 @@ namespace ExclelToSql.Controllers
                         : null,
 
 
-                    Teacher = includeTeacher && c.NationalCodeNavigation != null
+                    Teacher = includeTeacher && c.Teacher != null
                         ? new
                         {
-                            c.NationalCodeNavigation.Id,
-                            c.NationalCodeNavigation.PersonalCode,
-                            c.NationalCodeNavigation.FirstName,
-                            c.NationalCodeNavigation.LastName,
-                            c.NationalCodeNavigation.AccountNumber,
-                            c.NationalCodeNavigation.InsuranceNumber,
-                            c.NationalCodeNavigation.NationalCode,
-                            c.NationalCodeNavigation.Grade,
-                            c.NationalCodeNavigation.Ranking
+                            c.Teacher.Id,
+                            c.Teacher.PersonalCode,
+                            c.Teacher.FirstName,
+                            c.Teacher.LastName,
+                            c.Teacher.AccountNumber,
+                            c.Teacher.InsuranceNumber,
+                            c.Teacher.NationalCode,
+                            c.Teacher.Grade,
+                            c.Teacher.Ranking
                         }
                         : null,
 
@@ -196,7 +238,20 @@ namespace ExclelToSql.Controllers
                             c.SectionNavigation.Id,
                             c.SectionNavigation.Section1
                         }
-                        : null
+                        : null,
+
+                    Group = includegroup && c.GroupCodeNavigation != null
+                         ? new
+                         {
+                             c.GroupCodeNavigation.Id,
+                             c.GroupCodeNavigation.GroupName,
+
+                         }
+                         : null
+
+
+
+
 
                 })
                 .FirstOrDefaultAsync();

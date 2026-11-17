@@ -42,13 +42,19 @@ public partial class Class
 
     public int? MakeUpSessions { get; set; }
 
+    [StringLength(50)]
+    public string? FirstName { get; set; }
+
+    [StringLength(50)]
+    public string? LastName { get; set; }
+
     [ForeignKey("CourseId")]
     [InverseProperty("Classes")]
     public virtual Course? Course { get; set; }
 
-    [ForeignKey("NationalCode")]
+    [ForeignKey("GroupCode")]
     [InverseProperty("Classes")]
-    public virtual Teacher? NationalCodeNavigation { get; set; }
+    public virtual EducationalGroup? GroupCodeNavigation { get; set; }
 
     [ForeignKey("Section")]
     [InverseProperty("Classes")]
@@ -57,4 +63,8 @@ public partial class Class
     [ForeignKey("SemesterCode")]
     [InverseProperty("Classes")]
     public virtual Semester? SemesterCodeNavigation { get; set; }
+
+    [ForeignKey("TeacherId")]
+    [InverseProperty("Classes")]
+    public virtual Teacher? Teacher { get; set; }
 }

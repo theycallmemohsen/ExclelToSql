@@ -42,4 +42,13 @@ public partial class TeachersHistory
     public string? EditorName { get; set; }
 
     public int? Duty { get; set; }
+
+    public int? GroupCode { get; set; }
+
+    public int? SemesterCode { get; set; }
+
+    public int? CooperationType { get; set; }
+
+    [StringLength(50)]
+    public string? PhoneNumber { get; set; }
 }
