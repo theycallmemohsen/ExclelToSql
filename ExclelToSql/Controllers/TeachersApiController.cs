@@ -1,5 +1,4 @@
-﻿
-using ExclelToSql.Data;
+﻿using ExclelToSql.Data;
 //using ExclelToSql.Filters;
 using ExclelToSql.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -232,6 +231,7 @@ namespace ExclelToSql.Controllers
         public record MajorDto(int Id, string? Major1);
         public record FacultyDto(int? Id, string? Title, List<MajorDto> Majors);
         public record GroupDto(int Id, string? GroupName, List<FacultyDto> Faculties);
+        public record PagedResult<T>(List<T> Data, int TotalCount, int Page, int PageSize);
 
         // add IMemoryCache to your existing constructor:  private readonly IMemoryCache _cache;
 
@@ -268,7 +268,12 @@ namespace ExclelToSql.Controllers
             return cached!;
         }
 
-        private async Task<List<object>> LoadTeachersAsync(int? id, string? expand)
+        private async Task<PagedResult<object>> LoadTeachersAsync(
+            int? id,
+            string? expand,
+            string? search,
+            int page,
+            int pageSize)
         {
             var ex = (expand ?? "")
                 .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
@@ -283,9 +288,35 @@ namespace ExclelToSql.Controllers
             bool includeMajors = all || ex.Contains("majors");
 
             IQueryable<Teacher> query = _context.Teachers.AsNoTracking();
-            if (id.HasValue) query = query.Where(t => t.Id == id.Value);
 
-            var teachers = await query.Select(t => new
+            if (id.HasValue)
+                query = query.Where(t => t.Id == id.Value);
+
+            // --- SEARCH LOGIC ---
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var searchTerm = search.Trim().ToLower();
+                query = query.Where(t =>
+                    (t.FirstName != null && t.FirstName.ToLower().Contains(searchTerm)) ||
+                    (t.LastName != null && t.LastName.ToLower().Contains(searchTerm)) ||
+                    (t.AccountNumber != null && t.AccountNumber.ToLower().Contains(searchTerm)) ||
+                    (t.PersonalCode != null && t.PersonalCode.ToLower().Contains(searchTerm)) ||
+                    (t.NationalCode != null && t.NationalCode.ToLower().Contains(searchTerm)) ||
+                    (t.Grade.HasValue && t.Grade.Value.ToString().Contains(searchTerm)) ||
+                    (t.Ranking.HasValue && t.Ranking.Value.ToString().Contains(searchTerm)) ||
+                    (t.GroupCode.HasValue && t.GroupCode.Value.ToString().Contains(searchTerm))
+                );
+            }
+
+            // --- PAGINATION LOGIC ---
+            var totalCount = await query.CountAsync();
+
+            // Apply pagination BEFORE selecting to optimize SQL query
+            var pagedQuery = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var teachers = await pagedQuery.Select(t => new
             {
                 t.Id,
                 t.PersonalCode,
@@ -327,7 +358,7 @@ namespace ExclelToSql.Controllers
 
             var groups = (includeGroup || includeMajors) ? await GetGroupsAsync() : null;
 
-            return teachers.Select(t =>
+            var resultList = teachers.Select(t =>
             {
                 GroupDto? g = null;
                 if (groups != null && t.GroupCode != null)
@@ -354,19 +385,40 @@ namespace ExclelToSql.Controllers
                     Group = g == null ? null : new { g.Id, g.GroupName, Faculties = includeMajors ? g.Faculties : null }
                 };
             }).ToList();
+
+            return new PagedResult<object>(resultList, totalCount, page, pageSize);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? expand)
-            => Ok(await LoadTeachersAsync(null, expand));
+        public async Task<IActionResult> GetAll(
+            [FromQuery] string? expand,
+            [FromQuery] string? search,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 50)
+        {
+            // Prevent excessively large page sizes
+            if (pageSize > 100) pageSize = 100;
+            if (page < 1) page = 1;
+
+            var result = await LoadTeachersAsync(null, expand, search, page, pageSize);
+            return Ok(result);
+        }
 
         //// GET: api/TeachersApi/14
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id, [FromQuery] string? expand)
         {
-            var list = await LoadTeachersAsync(id, expand);
-            return list.Count == 0 ? NotFound() : Ok(list[0]);
+            // We don't need pagination for GetById, so we pass page=1, pageSize=1
+            var result = await LoadTeachersAsync(id, expand, null, 1, 1);
+
+            return result.Data.Count == 0 ? NotFound() : Ok(result.Data[0]);
         }
+
+        //To search: GET /api/TeachersApi? search = محمد & page = 1 & pageSize = 50
+
+        //To go to page 2: GET /api/TeachersApi? page = 2 & pageSize = 50
+
+        //To combine: GET /api/TeachersApi? search = محمد & expand = fee & page = 2 & pageSize = 5
 
 
         [HttpPatch("{personalCode}")]

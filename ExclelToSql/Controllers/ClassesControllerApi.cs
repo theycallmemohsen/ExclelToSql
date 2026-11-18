@@ -16,12 +16,21 @@ namespace ExclelToSql.Controllers
         {
             _context = context;
         }
-
+        public record PagedResult<T>(List<T> Data, int TotalCount, int Page, int PageSize);
 
         // GET: api/ClassesApi
+
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? expand)
+        public async Task<IActionResult> GetAll(
+            [FromQuery] string? expand,
+            [FromQuery] string? search,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 50)
         {
+            // Prevent excessively large page sizes
+            if (pageSize > 100) pageSize = 100;
+            if (page < 1) page = 1;
+
             IQueryable<Class> query = _context.Classes;
 
             bool includeCourse = false;
@@ -29,8 +38,6 @@ namespace ExclelToSql.Controllers
             bool includeSection = false;
             bool includesemester = false;
             bool includegroup = false;
-
-
 
             if (!string.IsNullOrWhiteSpace(expand))
             {
@@ -43,10 +50,7 @@ namespace ExclelToSql.Controllers
                 includeSection = expands.Contains("section") || expands.Contains("all");
                 includesemester = expands.Contains("semester") || expands.Contains("all");
                 includegroup = expands.Contains("group") || expands.Contains("all");
-
-
             }
-
 
             if (includeCourse)
                 query = query.Include(c => c.Course);
@@ -60,12 +64,28 @@ namespace ExclelToSql.Controllers
             if (includesemester)
                 query = query.Include(c => c.SemesterCodeNavigation);
 
-
             if (includegroup)
                 query = query.Include(c => c.GroupCodeNavigation);
 
+            // --- SEARCH LOGIC ---
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var searchTerm = search.Trim().ToLower();
+                query = query.Where(c =>
+                    (c.TempCourse != null && c.TempCourse.ToLower().Contains(searchTerm)) ||
+                    (c.CourseId.HasValue && c.CourseId.Value.ToString().Contains(searchTerm)) ||
+                    (c.Section.HasValue && c.Section.Value.ToString().Contains(searchTerm)) ||
+                    (c.TeacherId != null && c.TeacherId.ToLower().Contains(searchTerm)) ||
+                    (c.GroupCode.HasValue && c.GroupCode.Value.ToString().Contains(searchTerm))
+                );
+            }
+
+            // --- PAGINATION LOGIC ---
+            var totalCount = await query.CountAsync();
 
             var result = await query
+                 .Skip((page - 1) * pageSize)
+                 .Take(pageSize)
                  .Select(c => new
                  {
                      c.Id,
@@ -80,12 +100,9 @@ namespace ExclelToSql.Controllers
                      c.PresentationCode,
                      c.MakeUpSessions,
 
-
-
                      Course = includeCourse && c.Course != null
                          ? new
                          {
-
                              c.Course.CourseId,
                              c.Course.CourseName,
                              c.Course.Theoretical,
@@ -93,7 +110,6 @@ namespace ExclelToSql.Controllers
                              c.Course.CreditsCoefficients
                          }
                          : null,
-
 
                      Teacher = includeTeacher && c.Teacher != null
                          ? new
@@ -110,7 +126,6 @@ namespace ExclelToSql.Controllers
                          }
                          : null,
 
-
                      SectionInfo = includeSection && c.SectionNavigation != null
                          ? new
                          {
@@ -123,18 +138,19 @@ namespace ExclelToSql.Controllers
                          {
                              c.GroupCodeNavigation.Id,
                              c.GroupCodeNavigation.GroupName,
-
                          }
                          : null
-
                  })
                  .ToListAsync();
 
-
-            return Ok(result);
+            return Ok(new PagedResult<object>(result.Cast<object>().ToList(), totalCount, page, pageSize));
         }
 
+        //To search: GET /api/ClassesApi? search = ریاضی & page = 1 & pageSize = 50
 
+        //To go to page 2: GET /api/ClassesApi? page = 2 & pageSize = 50
+
+        //To combine: GET /api/ClassesApi? search = معارف & expand = fee & page = 2 & pageSize = 5
 
 
         // GET: api/ClassesApi/14

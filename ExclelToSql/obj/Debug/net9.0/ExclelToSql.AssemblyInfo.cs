@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExclelToSql")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6a365b57f883ac0db8763758231c1db1b796997")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e056bdb3bf3ba2863a4d1e7ea4cbbf0669dd100d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExclelToSql")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExclelToSql")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
