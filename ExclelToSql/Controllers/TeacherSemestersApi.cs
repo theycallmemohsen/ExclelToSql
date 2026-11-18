@@ -18,22 +18,75 @@ namespace ExclelToSql.Controllers
 
         // GET api/TeachersSemesterApi
         // Optional filters: ?teacherId=0010233881  and/or  ?semesterCode=2
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll([FromQuery] string? teacherId, [FromQuery] int? semesterCode)
+        //{
+        //    var query = _context.Teachers
+        //        .AsNoTracking()
+        //        .SelectMany(t => t.SemesterCodes, (t, s) => new
+        //        {
+        //            TeacherId = t.PersonalCode,
+        //            SemesterCode = s.Id
+        //        });
+
+        //    if (!string.IsNullOrWhiteSpace(teacherId))
+        //        query = query.Where(x => x.TeacherId == teacherId);
+
+        //    if (semesterCode.HasValue)
+        //        query = query.Where(x => x.SemesterCode == semesterCode.Value);
+
+        //    var rows = await query.ToListAsync();
+
+        //    var data = rows
+        //        .GroupBy(x => x.TeacherId)
+        //        .Select(g => new
+        //        {
+        //            TeacherId = g.Key,
+        //            SemesterCodes = g.Select(x => x.SemesterCode).Distinct().OrderBy(c => c).ToList()
+        //        })
+        //        .OrderBy(x => x.TeacherId)
+        //        .ToList();
+
+        //    return Ok(data);
+        //}
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        //GET /api/TeachersSemesterApi?expand=semester
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? teacherId, [FromQuery] int? semesterCode)
+        public async Task<IActionResult> GetAll(
+    [FromQuery] string? teacherId,
+    [FromQuery] int? semesterCode,
+    [FromQuery] string? expand)          // NEW: ?expand=semester  (or "all")
         {
+            var ex = (expand ?? "")
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Select(x => x.ToLower()).ToList();
+            bool includeSemester = ex.Contains("semester") || ex.Contains("all");
+
             var query = _context.Teachers
                 .AsNoTracking()
                 .SelectMany(t => t.SemesterCodes, (t, s) => new
                 {
                     TeacherId = t.PersonalCode,
-                    SemesterCode = s.Id
+                    SemesterId = s.Id,
+                    // Semester's own columns, read only when requested
+                    SemesterInfo = includeSemester
+                        ? new
+                        {
+                            s.Id,
+                            s.SemesterCode,      // Semester's own SemesterCode column
+                            s.Title
+                            // add any other Semester columns here
+                        }
+                        : null
                 });
 
             if (!string.IsNullOrWhiteSpace(teacherId))
                 query = query.Where(x => x.TeacherId == teacherId);
 
             if (semesterCode.HasValue)
-                query = query.Where(x => x.SemesterCode == semesterCode.Value);
+                query = query.Where(x => x.SemesterId == semesterCode.Value);
 
             var rows = await query.ToListAsync();
 
@@ -42,13 +95,23 @@ namespace ExclelToSql.Controllers
                 .Select(g => new
                 {
                     TeacherId = g.Key,
-                    SemesterCodes = g.Select(x => x.SemesterCode).Distinct().OrderBy(c => c).ToList()
+                    SemesterCodes = g.Select(x => x.SemesterId).Distinct().OrderBy(c => c).ToList(),
+
+                    // only filled when expand=semester, otherwise null
+                    Semesters = includeSemester
+                        ? g.Select(x => x.SemesterInfo!)
+                           .GroupBy(s => s.Id)
+                           .Select(sg => sg.First())
+                           .OrderBy(s => s.Id)
+                           .ToList()
+                        : null
                 })
                 .OrderBy(x => x.TeacherId)
                 .ToList();
 
             return Ok(data);
         }
+        // /////////////////////////////////////////////////////////////////////////////////////////////////
 
         // POST api/TeachersSemesterApi   body: { "teacherId": "70823153", "semesterCode": 2 }
         [HttpPost]
